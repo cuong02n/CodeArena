@@ -6,7 +6,7 @@
 
 using namespace std;
 using ll = long long;
-using ull = unsigned long long;
+using ull = unsigned long long;;
 map<ll, int> B;
 vector<int> res;
 int main() {
