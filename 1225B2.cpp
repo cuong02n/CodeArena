@@ -27,11 +27,8 @@ void solve() {
         }
     }
     int res = val;
+    
     for (int i = d; i < n; i++) {
-        // the last before : A[d-1]: i-1
-        // the first before : A[0]; need : i-d
-        // add A[i];
-        // remove A[i-d];
         if (num[A[i - d]] == 1) {
             num.erase(A[i - d]);
             val--;
