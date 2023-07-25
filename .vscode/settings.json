@@ -90,5 +90,8 @@
         "thread": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "kadane"
+    ]
 }
