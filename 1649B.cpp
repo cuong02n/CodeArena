@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 25-07-2023  20:08:07  UTC: +7
+    created : 27-07-2023  20:20:50  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -89,46 +89,36 @@ ostream& operator<<(ostream& os, priority_queue<T> A) {
 }
 
 int MOD = 1e9 + 7;
-
-template <class T>
-T kadane(T A[], int size) {
-    T max_ending_here = 0;
-    T MAX = 0;
-    for (int i = 0; i < size; i++) {
-        max_ending_here += A[i];
-        if (max_ending_here < 0) {
-            max_ending_here = 0;
-        } else if (max_ending_here > MAX) {
-            MAX = max_ending_here;
-        }
-    }
-    if (MAX == 0) {
-        MAX = LLONG_MIN;
-        for (int i = 0; i < size; i++) {
-            MAX = max(MAX, A[i]);
-        }
-    }
-    return MAX;
-}
-
 void solve(bool verbose = false) {
     int n;
     cin >> n;
-    ll A[n / 2 + n % 2];
-    ll B[n / 2 + n % 2];
-    int a = n / 2 + n % 2;
-    int b = n / 2;
-    for (int i = 0; i < n / 2; i++) {
-        cin >> A[i];
-        cin >> B[i];
+    if (verbose) {
+        cout << "n: " << n << endl;
     }
-    if (n % 2) {
-        cin >> A[n / 2 + n % 2 - 1];
+    ll max = 0;
+    ll sum = 0;
+    for (int i = 0; i < n; i++) {
+        ll x;
+        cin >> x;
+        if (verbose && i < n - 1) {
+            cout << x << " ";
+        } else if (verbose) {
+            cout << x << " " << endl;
+        }
+        if (max < x) {
+            max = x;
+        }
+        sum += x;
     }
-    ll resA = kadane(A, n / 2 + n % 2);
-    ll resB = (n == 1) ? LLONG_MIN : kadane(B, n / 2);
-
-    cout << max(resA, resB) << endl;
+    int res;
+    if (max == 0) {
+        res = 0;
+    } else if (2 * max <= sum + 1) {
+        res = 1;
+    } else {
+        res = 1 + 2 * max - sum - 1;
+    }
+    cout << res << endl;
 }
 
 void reset() {

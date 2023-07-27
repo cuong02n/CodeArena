@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 25-07-2023  20:08:07  UTC: +7
+    created : 26-07-2023  19:44:16  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -90,45 +90,39 @@ ostream& operator<<(ostream& os, priority_queue<T> A) {
 
 int MOD = 1e9 + 7;
 
-template <class T>
-T kadane(T A[], int size) {
-    T max_ending_here = 0;
-    T MAX = 0;
-    for (int i = 0; i < size; i++) {
-        max_ending_here += A[i];
-        if (max_ending_here < 0) {
-            max_ending_here = 0;
-        } else if (max_ending_here > MAX) {
-            MAX = max_ending_here;
-        }
+void increment(map<int, int>& map, int value) {
+    auto it = map.find(value);
+    if (it == map.end()) {
+        map.insert({value, 1});
+    } else {
+        map[it->first] = it->second + 1;
     }
-    if (MAX == 0) {
-        MAX = LLONG_MIN;
-        for (int i = 0; i < size; i++) {
-            MAX = max(MAX, A[i]);
-        }
-    }
-    return MAX;
 }
 
+ll cal(map<int, int>& map) {
+    ll k = 0LL;
+    for (auto it = map.begin(); it != map.end(); it++) {
+        k += 1ll * (it->second) * (it->second - 1);
+    }
+    return k;
+}
 void solve(bool verbose = false) {
     int n;
     cin >> n;
-    ll A[n / 2 + n % 2];
-    ll B[n / 2 + n % 2];
-    int a = n / 2 + n % 2;
-    int b = n / 2;
-    for (int i = 0; i < n / 2; i++) {
-        cin >> A[i];
-        cin >> B[i];
-    }
-    if (n % 2) {
-        cin >> A[n / 2 + n % 2 - 1];
-    }
-    ll resA = kadane(A, n / 2 + n % 2);
-    ll resB = (n == 1) ? LLONG_MIN : kadane(B, n / 2);
+    map<int, int> hor;
+    map<int, int> ver;
+    map<int, int> back;
+    map<int, int> forw;
 
-    cout << max(resA, resB) << endl;
+    for (int i = 0; i < n; i++) {
+        int a, b;
+        cin >> a >> b;
+        increment(hor, b);
+        increment(ver, a);
+        increment(back, a - b);
+        increment(forw, a + b);
+    }
+    cout << cal(hor) + cal(ver) + cal(back) + cal(forw) << endl;
 }
 
 void reset() {

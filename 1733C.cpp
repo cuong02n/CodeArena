@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 25-07-2023  20:08:07  UTC: +7
+    created : 27-07-2023  19:36:12  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -87,48 +87,39 @@ ostream& operator<<(ostream& os, priority_queue<T> A) {
     }
     return os;
 }
-
-int MOD = 1e9 + 7;
-
-template <class T>
-T kadane(T A[], int size) {
-    T max_ending_here = 0;
-    T MAX = 0;
-    for (int i = 0; i < size; i++) {
-        max_ending_here += A[i];
-        if (max_ending_here < 0) {
-            max_ending_here = 0;
-        } else if (max_ending_here > MAX) {
-            MAX = max_ending_here;
-        }
+using p = pair<int, int>;
+void choose(vector<p>& res, int A[], int i, int j) {
+    if (i >= j) {
+        return;
     }
-    if (MAX == 0) {
-        MAX = LLONG_MIN;
-        for (int i = 0; i < size; i++) {
-            MAX = max(MAX, A[i]);
-        }
+    if ((A[i] + A[j]) % 2) {
+        A[j] = A[i];
+    } else {
+        A[i] = A[j];
     }
-    return MAX;
+    res.push_back({i, j});
 }
-
+int MOD = 1e9 + 7;
 void solve(bool verbose = false) {
     int n;
     cin >> n;
-    ll A[n / 2 + n % 2];
-    ll B[n / 2 + n % 2];
-    int a = n / 2 + n % 2;
-    int b = n / 2;
-    for (int i = 0; i < n / 2; i++) {
+    int A[n];
+    vector<p> res;
+    for (int i = 0; i < n; i++) {
         cin >> A[i];
-        cin >> B[i];
     }
-    if (n % 2) {
-        cin >> A[n / 2 + n % 2 - 1];
+    choose(res, A, 0, n - 1);
+    for (int i = 1; i < n - 1; i++) {
+        if ((A[i] + A[0]) % 2) {
+            choose(res, A, 0, i);
+        } else {
+            choose(res, A, i, n - 1);
+        }
     }
-    ll resA = kadane(A, n / 2 + n % 2);
-    ll resB = (n == 1) ? LLONG_MIN : kadane(B, n / 2);
-
-    cout << max(resA, resB) << endl;
+    cout << res.size() << endl;
+    for (int i = 0; i < res.size(); i++) {
+        cout << res[i].first + 1 << " " << res[i].second + 1 << endl;
+    }
 }
 
 void reset() {

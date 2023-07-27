@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 25-07-2023  20:08:07  UTC: +7
+    created : 27-07-2023  20:39:16  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -89,46 +89,34 @@ ostream& operator<<(ostream& os, priority_queue<T> A) {
 }
 
 int MOD = 1e9 + 7;
+int verbose = -1;
+using p = pair<int, int>;
+void solve(bool v = false) {
+    int n, k;
+    cin >> n >> k;
+    p A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i].first;
+        A[i].first = A[i].first % k;
+        if (!A[i].first)
+            A[i].first = k;
+        A[i].second = i + 1;
+    }
 
-template <class T>
-T kadane(T A[], int size) {
-    T max_ending_here = 0;
-    T MAX = 0;
-    for (int i = 0; i < size; i++) {
-        max_ending_here += A[i];
-        if (max_ending_here < 0) {
-            max_ending_here = 0;
-        } else if (max_ending_here > MAX) {
-            MAX = max_ending_here;
+    sort(A, A + n, [](p a, p b) {
+        if (a.first == b.first) {
+            return a.second < b.second;
         }
-    }
-    if (MAX == 0) {
-        MAX = LLONG_MIN;
-        for (int i = 0; i < size; i++) {
-            MAX = max(MAX, A[i]);
-        }
-    }
-    return MAX;
-}
+        return a.first > b.first;
+    });
 
-void solve(bool verbose = false) {
-    int n;
-    cin >> n;
-    ll A[n / 2 + n % 2];
-    ll B[n / 2 + n % 2];
-    int a = n / 2 + n % 2;
-    int b = n / 2;
-    for (int i = 0; i < n / 2; i++) {
-        cin >> A[i];
-        cin >> B[i];
+    for (int i = 0; i < n; i++) {
+        cout << A[i].second << " ";
     }
-    if (n % 2) {
-        cin >> A[n / 2 + n % 2 - 1];
-    }
-    ll resA = kadane(A, n / 2 + n % 2);
-    ll resB = (n == 1) ? LLONG_MIN : kadane(B, n / 2);
+    cout << endl;
 
-    cout << max(resA, resB) << endl;
+    if (v) {
+    }
 }
 
 void reset() {
@@ -138,6 +126,7 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
+    chrono::steady_clock::time_point start = chrono::steady_clock::now();
 
 #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
@@ -150,9 +139,18 @@ int main() {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";
 #endif
-        solve();
+        if (verbose == i + 1) {
+            solve(true);
+        } else {
+            solve();
+        }
         reset();
     }
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+#ifndef ONLINE_JUDGE
+    chrono::duration<double> time_span = chrono::duration_cast<std::chrono::duration<double>>(end - start);
+    cout << "time use: " << time_span.count() << endl;
+#endif
 
     return 0;
 }

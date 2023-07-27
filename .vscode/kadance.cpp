@@ -23,6 +23,12 @@ T kadane(T A[], int size) {
             MAX = max_ending_here;
         }
     }
+    if (MAX == 0) {
+        MAX = LLONG_MIN;
+        for (int i = 0; i < size; i++) {
+            MAX = max(MAX, A[i]);
+        }
+    }
     return MAX;
 }
 
@@ -45,6 +51,16 @@ T kadane(T A[], int size, int& result_begin, int& result_end) {
                 MAX = max_ending_here;
                 result_begin = result_begin_tmp;
                 result_end = i;
+            }
+        }
+    }
+    if (MAX == 0) {
+        MAX = LLONG_MIN;
+        for (int i = 0; i < size; i++) {
+            if (MAX < A[i]) {
+                result_begin = i;
+                result_end = i;
+                MAX = A[i];
             }
         }
     }
