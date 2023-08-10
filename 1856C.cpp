@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  22:43:48  UTC: +7
+    created : 06-08-2023  22:31:50  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -33,8 +33,44 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+template <class T>
+int _max(T first, T last) {
+    int __max = INT_MIN;
+    for (T it = first; it != last; it++) {
+        __max = max(__max, *it);
+    }
+    return __max;
+}
+ll build_from(ll A[], ll k, int i) {
+    cout << "build from " << i;
+    ll prev = A[i];
+    for (int j = i - 1; j >= 0; j--) {
+        if (A[j] > prev) {
+            return A[j];
+        }
+        int added = prev + 1 - A[j];
+        if (added > k) {
+            return prev;
+        }
+        k -= added;
+        prev = A[j] + added;
+    }
+    return prev;
+}
 void solve(bool v = false, int all_case = -1) {
-    
+    ll n, k;
+    cin >> n >> k;
+    ll A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+    }
+    ll res = INT_MIN;
+    for (int i = n - 1; i >= 1; i--) {
+        ll x = build_from(A, k, i);
+        cout << " = " << x << endl;
+        res = max(res, x);
+    }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -78,4 +114,3 @@ int main() {
 
     return 0;
 }
-

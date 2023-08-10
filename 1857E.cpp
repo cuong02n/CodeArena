@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  22:43:48  UTC: +7
+    created : 07-08-2023  23:01:27  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -33,8 +33,36 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+using p = pair<ll, ll>;
 void solve(bool v = false, int all_case = -1) {
-    
+    int n;
+    cin >> n;
+    p A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i].first;
+        A[i].second = i;
+    }
+    sort(A, A + n);
+    ll base = n;
+    for (ll i = n - 1, mul = 1; i > 0; i--, mul++) {
+        base += 1ll * (A[i].first - A[i - 1].first) * mul;
+    }
+    vector<p> res;
+    res.push_back({A[0].second, base});
+    base -= n;
+    ll prev = 0;
+
+    for (ll i = 1; i < n; i++) {
+        base -= 1ll * (n - i) * (A[i].first - A[i - 1].first);
+        prev += 1ll * i * (A[i].first - A[i - 1].first);
+        res.push_back({A[i].second, base + prev + n});
+    }
+    sort(res.begin(), res.end());
+    for (int i = 0; i < res.size(); i++) {
+        cout << res[i].second << " ";
+    }
+    cout << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -78,4 +106,3 @@ int main() {
 
     return 0;
 }
-

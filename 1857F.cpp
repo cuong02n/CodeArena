@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  22:43:48  UTC: +7
+    created : 07-08-2023  23:46:54  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -34,7 +34,28 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
-    
+    map<ll, int> A;
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        ll x;
+        cin >> x;
+        if (A.find(x) == A.end()) {
+            A.insert({x, 1});
+        } else {
+            A[x]++;
+        }
+    }
+    int m;
+    cin >> m;
+    for (int i = 0; i < m;i++) {
+        ll x, y;
+        cin >> x >> y;
+        // a + b = y;
+        // a * b = x;
+        // a*a -a*y + x = 0
+        
+    }
     if (!v && all_case == all_cases) {
         return;
     }
@@ -78,4 +99,3 @@ int main() {
 
     return 0;
 }
-

@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  19:27:41  UTC: +7
+    created : 29-07-2023  21:57:47  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -91,37 +91,52 @@ ostream& operator<<(ostream& os, priority_queue<T> A) {
 int MOD = 1e9 + 7;
 int verbose = -1;
 using p = pair<int, int>;
+void add(int A[], vector<p>& res, int i, int j) {
+    A[i] += A[j];
+    res.push_back({i, j});
+}
 void solve(bool v = false) {
     int n;
     cin >> n;
     int A[n + 1];
-    set<p> B;
-    for (int i = 1; i <= n; i++) {
+    int _min = INT_MAX;
+    int _ind_min = -1;
+    int _max = INT_MIN;
+    int _ind_max = -1;
+    for (int i = 1; i < n + 1; i++) {
         cin >> A[i];
-    }
-    vector<int> free_ind;
-    free_ind.push_back(1);
-    for (int i = 2; i <= n; i++) {
-        if (A[i - 1] - A[i] > 0) {
-            B.insert({A[i - 1] - A[i], i});
-        } else {
-            free_ind.push_back(i);
+        if (A[i] < _min) {
+            _min = A[i];
+            _ind_min = i;
+        }
+        if (A[i] > _max) {
+            _max = A[i];
+            _ind_max = i;
         }
     }
-    // cout << free_ind << endl;
-    int res[n + 1];
-    for (int i = 0; i < free_ind.size(); i++) {
-        res[i + 1] = free_ind[i];
+    vector<p> res;
+    if (_max >= -_min) {
+        // add to all A[i] with max
+        for (int i = 1; i <= n; i++) {
+            add(A, res, i, _ind_max);
+        }
+        for (int i = 2; i <= n; i++) {
+            add(A, res, i, i - 1);
+        }
+    } else {
+        // add to all A[i] with min
+        for (int i = 1; i <= n; i++) {
+            add(A, res, i, _ind_min);
+        }
+        for (int i = n - 1; i >= 1; i--) {
+            add(A, res, i, i + 1);
+        }
     }
-    auto it = B.begin();
-    for (int i = free_ind.size() + 1; (i <= n && it != B.end()); i++, it++) {
-        res[i] = it->second;
-    }
-    for (int i = 1; i <= n; i++) {
-        cout << res[i] << " ";
-    }
-    cout << endl;
 
+    cout << res.size() << endl;
+    for (int i = 0; i < res.size(); i++) {
+        cout << res[i].first << " " << res[i].second << endl;
+    }
     if (v) {
     }
 }

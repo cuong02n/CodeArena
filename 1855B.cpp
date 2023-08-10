@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  19:27:41  UTC: +7
+    created : 29-07-2023  21:49:24  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -90,38 +90,41 @@ ostream& operator<<(ostream& os, priority_queue<T> A) {
 
 int MOD = 1e9 + 7;
 int verbose = -1;
-using p = pair<int, int>;
-void solve(bool v = false) {
-    int n;
-    cin >> n;
-    int A[n + 1];
-    set<p> B;
-    for (int i = 1; i <= n; i++) {
-        cin >> A[i];
+ll gcd(ll a, ll b) {
+    if (b > a) {
+        int tmp = b;
+        b = a;
+        a = b;
     }
-    vector<int> free_ind;
-    free_ind.push_back(1);
-    for (int i = 2; i <= n; i++) {
-        if (A[i - 1] - A[i] > 0) {
-            B.insert({A[i - 1] - A[i], i});
-        } else {
-            free_ind.push_back(i);
-        }
+    if (b == a) {
+        return a;
     }
-    // cout << free_ind << endl;
-    int res[n + 1];
-    for (int i = 0; i < free_ind.size(); i++) {
-        res[i + 1] = free_ind[i];
+    if (a == 1 || b == 1) {
+        return 1;
     }
-    auto it = B.begin();
-    for (int i = free_ind.size() + 1; (i <= n && it != B.end()); i++, it++) {
-        res[i] = it->second;
+    if (a % b == 0) {
+        return b;
     }
-    for (int i = 1; i <= n; i++) {
-        cout << res[i] << " ";
-    }
-    cout << endl;
+    return gcd(b, a % b);
+}
+ll lcm(ll a, ll b) {
+    return a / gcd(a, b) * b;
+}
 
+void solve(bool v = false) {
+    ll n;
+    cin >> n;
+    if (n % 2) {
+        cout << 1 << endl;
+        return;
+    }
+    ll x = 1;
+    int next = 2;
+    while ((n % lcm(x, next) == 0)) {
+        x = lcm(x, next);
+        next++;
+    }
+    cout << next - 1 << endl;
     if (v) {
     }
 }

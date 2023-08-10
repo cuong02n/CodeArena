@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  22:43:48  UTC: +7
+    created : 06-08-2023  22:16:42  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -34,7 +34,28 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
-    
+    int n;
+    cin >> n;
+    int A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+    }
+    int res = 0;
+    while (!is_sorted(A, A + n, [](int a, int b) {
+        return a < b;
+    })) {
+        int _min = INT_MAX;  // exclude 0
+        for (int i = 0; i < n; i++) {
+            if (A[i] != 0) {
+                _min = min(_min, A[i]);
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            A[i] = max(0, A[i] - _min);
+        }
+        res += _min;
+    }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -78,4 +99,3 @@ int main() {
 
     return 0;
 }
-

@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  22:43:48  UTC: +7
+    created : 07-08-2023  21:39:41  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -34,7 +34,16 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
-    
+    int n;
+    cin >> n;
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        sum += x;
+    }
+    cout << (sum % 2 == 0 ? "YES" : "NO") << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -78,4 +87,3 @@ int main() {
 
     return 0;
 }
-

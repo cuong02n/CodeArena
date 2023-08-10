@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  19:27:41  UTC: +7
+    created : 27-07-2023  20:39:16  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -90,37 +90,28 @@ ostream& operator<<(ostream& os, priority_queue<T> A) {
 
 int MOD = 1e9 + 7;
 int verbose = -1;
-using p = pair<int, int>;
 void solve(bool v = false) {
-    int n;
-    cin >> n;
-    int A[n + 1];
-    set<p> B;
+    int n, m, d;
+    cin >> n >> m >> d;
+    int indexP[n + 1];
     for (int i = 1; i <= n; i++) {
-        cin >> A[i];
+        int x;
+        cin >> x;
+        indexP[x] = i;
     }
-    vector<int> free_ind;
-    free_ind.push_back(1);
-    for (int i = 2; i <= n; i++) {
-        if (A[i - 1] - A[i] > 0) {
-            B.insert({A[i - 1] - A[i], i});
-        } else {
-            free_ind.push_back(i);
-        }
+    int indexA[m + 1];
+    for (int i = 1; i <= m; i++) {
+        int x;
+        cin >> x;
+        indexA[i] = indexP[x];
     }
-    // cout << free_ind << endl;
-    int res[n + 1];
-    for (int i = 0; i < free_ind.size(); i++) {
-        res[i + 1] = free_ind[i];
+
+    int min_value = INT_MAX;
+    for (int i = 1; i < m; i++) {
+        int distance = indexA[i + 1] - indexA[i];
+        min_value = min(min_value, min(distance, (d + 1 < n) ? d + 1 - distance : INT_MAX));
     }
-    auto it = B.begin();
-    for (int i = free_ind.size() + 1; (i <= n && it != B.end()); i++, it++) {
-        res[i] = it->second;
-    }
-    for (int i = 1; i <= n; i++) {
-        cout << res[i] << " ";
-    }
-    cout << endl;
+    cout << max(min_value,0) << endl;
 
     if (v) {
     }

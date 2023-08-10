@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  22:43:48  UTC: +7
+    created : 07-08-2023  21:47:59  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -34,7 +34,48 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
-    
+    string x;
+    cin >> x;
+    int n = x.length();
+    int add = 0;
+    int A[n + 1];
+    A[0] = 0;
+    for (int i = 1; i <= n; i++) {
+        A[i] = x[i - 1] - '0';
+    }
+    int all_ind_0 = n+1;
+    for (int i = n; i >= 0; i--) {
+        // cout << "i=  " << i << endl;
+        // cout << "add " << add << endl;
+        if (add == 1) {
+            if (A[i] == 9) {
+                add = 1;
+            } else {
+                A[i]++;
+                if (A[i] >= 5) {
+                    add = 1;
+                } else {
+                    add = 0;
+                }
+            }
+            all_ind_0 = i + 1;
+        } else {
+            if (A[i] >= 5) {
+                add = 1;
+            }
+        }
+    }
+    if (A[0]) {
+        cout << A[0];
+    }
+    for (int i = 1; i <= n; i++) {
+        if (i >= all_ind_0) {
+            cout << 0;
+        } else {
+            cout << A[i];
+        }
+    }
+    cout << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -78,4 +119,3 @@ int main() {
 
     return 0;
 }
-

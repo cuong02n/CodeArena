@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  22:43:48  UTC: +7
+    created : 07-08-2023  22:19:38  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -24,7 +24,6 @@ void _print(it begin, it end) {
     for (it i = begin; i != end; i++) {
         cout << *i << " ";
     }
-    cout << endl;
 }
 
 void _verbose() {
@@ -34,7 +33,20 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
-    
+    int n;
+    cin >> n;
+    int m = n * (n - 1) / 2;
+    int B[m];
+    for (int i = 0; i < m; i++) {
+        cin >> B[i];
+    }
+    sort(B, B + m, less<int>());
+
+    for (int i = 0, add = n - 1; i < m; i += add, add--) {
+        cout << B[i] << " ";
+    }
+    cout << B[m - 1] << endl;
+    cout << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -78,4 +90,3 @@ int main() {
 
     return 0;
 }
-

@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 04-08-2023  19:27:41  UTC: +7
+    created : 29-07-2023  21:35:32  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -88,39 +88,31 @@ ostream& operator<<(ostream& os, priority_queue<T> A) {
     return os;
 }
 
+ll gcd(ll x,ll y){
+    
+}
+
+ll lcm(ll x, ll y) {
+    if (x % y == 0) {
+        return x;
+    }
+    return x / gcd(x, y) * y;
+}
+
 int MOD = 1e9 + 7;
 int verbose = -1;
-using p = pair<int, int>;
 void solve(bool v = false) {
     int n;
     cin >> n;
-    int A[n + 1];
-    set<p> B;
+    int res = 0;
     for (int i = 1; i <= n; i++) {
-        cin >> A[i];
-    }
-    vector<int> free_ind;
-    free_ind.push_back(1);
-    for (int i = 2; i <= n; i++) {
-        if (A[i - 1] - A[i] > 0) {
-            B.insert({A[i - 1] - A[i], i});
-        } else {
-            free_ind.push_back(i);
+        int x;
+        cin >> x;
+        if (i == x) {
+            res++;
         }
     }
-    // cout << free_ind << endl;
-    int res[n + 1];
-    for (int i = 0; i < free_ind.size(); i++) {
-        res[i + 1] = free_ind[i];
-    }
-    auto it = B.begin();
-    for (int i = free_ind.size() + 1; (i <= n && it != B.end()); i++, it++) {
-        res[i] = it->second;
-    }
-    for (int i = 1; i <= n; i++) {
-        cout << res[i] << " ";
-    }
-    cout << endl;
+    cout << res / 2 + res % 2 << endl;
 
     if (v) {
     }
