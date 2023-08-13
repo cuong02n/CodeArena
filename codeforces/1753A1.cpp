@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 11-08-2023  06:43:31  UTC: +7
+    created : 13-08-2023  10:51:09  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -33,13 +33,7 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    if (n % 2) {
-        cout << "lihwy" << endl;
-    }else{
-        cout << "fireghost" << endl;
-    }
+    
     if (!v && all_case == all_cases) {
         return;
     }
@@ -83,3 +77,4 @@ int main() {
 
     return 0;
 }
+

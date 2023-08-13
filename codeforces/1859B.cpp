@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 11-08-2023  06:43:31  UTC: +7
+    created : 12-08-2023  21:59:11  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -35,11 +35,33 @@ int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    if (n % 2) {
-        cout << "lihwy" << endl;
-    }else{
-        cout << "fireghost" << endl;
+    vector<int> A[n];
+    int ind = -1;
+    int _min = INT_MAX;
+    int __min = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        int m;
+        cin >> m;
+        for (int j = 0; j < m; j++) {
+            int x;
+            cin >> x;
+            A[i].push_back(x);
+        }
+        sort(A[i].begin(), A[i].end());
+        if (A[i][1] < _min) {
+            _min = A[i][1];
+            ind = i;
+        }
+        if (A[i][0] < __min) {
+            __min = A[i][0];
+        }
     }
+    ll sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += A[i][1];
+    }
+    sum = sum - A[ind][1] + __min;
+    cout << sum << endl;
     if (!v && all_case == all_cases) {
         return;
     }

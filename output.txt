@@ -1,2 +1,2 @@
-case 1: 31
-time use: 0.0044257
+case 1: 41551565
+time use: 0.009591

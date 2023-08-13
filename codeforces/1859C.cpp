@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 11-08-2023  06:43:31  UTC: +7
+    created : 12-08-2023  22:32:46  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,14 +32,41 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+int cal(int n, int k) {
+    // index = k
+    int B[n + 1];
+    for (int i = 1; i <= n; i++) {
+        B[i] = i;
+    }
+    stack<int> num;
+    for (int i = k; i <= n; i++) {
+        num.push(B[i]);
+    }
+
+    for (int i = k; i <= n; i++) {
+        B[i] = num.top();
+        num.pop();
+    }
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        sum += B[i] * i;
+    } 
+    int _max = INT_MIN;
+    for (int i = 1; i <= n; i++) {
+        _max = max(_max, B[i] * i);
+    }
+    sum -= _max;
+    return sum;
+}
+
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    if (n % 2) {
-        cout << "lihwy" << endl;
-    }else{
-        cout << "fireghost" << endl;
+    int res = 0;
+    for (int i = 1; i <= n; i++) {
+        res = max(res, cal(n, i));
     }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }

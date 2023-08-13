@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 11-08-2023  06:43:31  UTC: +7
+    created : 11-08-2023  09:13:06  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -35,11 +35,22 @@ int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    if (n % 2) {
-        cout << "lihwy" << endl;
-    }else{
-        cout << "fireghost" << endl;
+    int A[n];
+    int B[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
     }
+    int ind = 0;
+    double _max = -1.0;
+    for (int i = 0; i < n; i++) {
+        cin >> B[i];
+        if (B[i] * 1.0 / A[i] > _max) {
+            _max = B[i] * 1.0 / A[i];
+            ind = i + 1;
+        }
+    }
+    cout << 1 << endl
+         << ind << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -63,7 +74,6 @@ int main() {
 #endif
 
     int t = 1;
-    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

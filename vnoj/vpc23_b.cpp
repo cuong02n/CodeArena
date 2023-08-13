@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 11-08-2023  06:43:31  UTC: +7
+    created : 11-08-2023  06:58:20  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,14 +32,39 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    if (n % 2) {
-        cout << "lihwy" << endl;
-    }else{
-        cout << "fireghost" << endl;
+    int c, n, m;
+    cin >> c >> m >> n;
+    p A[n];
+    vector<int> s;
+    for (int i = 0; i < m; i++) {
+        int x;
+        cin >> x;
+        s.push_back(x);
     }
+    sort(s.begin(), s.end());
+    for (int i = 0; i < n; i++) {
+        cin >> A[i].first;
+        cin >> A[i].second;
+    }
+    sort(A, A + n);
+    int _c = c;
+    ll res = 0;
+    for (int i = 0, j = 0; i < n;) {
+        // j : provide index;
+        if (j < m && s[j] < A[i].first) {
+            _c = c;
+            j++;
+            continue;
+        }
+        if (_c >= A[i].second) {
+            _c -= A[i].second;
+            res += A[i].second;
+        }
+        i++;
+    }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }

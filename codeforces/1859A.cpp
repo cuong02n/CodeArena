@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 11-08-2023  06:43:31  UTC: +7
+    created : 12-08-2023  21:34:30  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -35,10 +35,52 @@ int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    if (n % 2) {
-        cout << "lihwy" << endl;
-    }else{
-        cout << "fireghost" << endl;
+    int A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+    }
+    int ind = -1;
+    for (int i = 0; i < n; i++) {  // is not divisor
+        int flag = 1;
+        for (int j = 0; j < n; j++) {
+            if (i == j) {
+                continue;
+            }
+            if (A[j] == A[i]) {
+                continue;
+            }
+            if (A[j] % A[i] == 0) {
+                flag = 0;
+                break;
+            }
+        }
+        if (flag == 1) {
+            ind = i;
+            break;
+        }
+    }
+    if (ind == -1) {
+        cout << -1 << endl;
+    } else {
+        int base = A[ind];
+        vector<int> B;
+        vector<int> C;
+        for (int i = 0; i < n; i++) {
+            if (A[i] == base) {
+                C.push_back(A[i]);
+            } else {
+                B.push_back(A[i]);
+            }
+        }
+        if (B.size() == 0 || C.size() == 0) {
+            cout << -1 << endl;
+            return;
+        }
+        cout << B.size() << " " << C.size() << endl;
+        _print(B.begin(), B.end());
+        cout << endl;
+        _print(C.begin(), C.end());
+        cout << endl;
     }
     if (!v && all_case == all_cases) {
         return;

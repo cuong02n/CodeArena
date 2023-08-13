@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 11-08-2023  06:43:31  UTC: +7
+    created : 11-08-2023  06:49:57  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -33,13 +33,25 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    if (n % 2) {
-        cout << "lihwy" << endl;
-    }else{
-        cout << "fireghost" << endl;
+    int r, c;
+    cin >> r >> c;
+    int p = -1;
+    int q = -1;
+    for (int i = 0; i < r; i++) {
+        string x;
+        cin >> x;
+        if (p != -1) {
+            continue;
+        }
+        for (int j = 0; j < x.length() - 2; j++) {
+            if (x[j] == '.' && x[j + 1] == '.' && x[j + 2] == '.') {
+                p = i + 1;
+                q = j + 1;
+                break;
+            }
+        }
     }
+    cout << p << " " << q << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -63,7 +75,6 @@ int main() {
 #endif
 
     int t = 1;
-    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 11-08-2023  06:43:31  UTC: +7
+    created : 11-08-2023  19:31:15  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,14 +32,42 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+using p = pair<int, int>;
+int MEX(int A[], int size) {
+    int B[size];
+    for (int i = 0; i < size; i++) {
+        B[i] = A[i];
+    }
+    sort(B, B + size);
+    int _MEX = 0;
+    for (int i = 0; i < size; i++) {
+        _MEX += _MEX == B[i];
+    }
+    return _MEX;
+}
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    if (n % 2) {
-        cout << "lihwy" << endl;
-    }else{
-        cout << "fireghost" << endl;
+    int A[n];
+    p B[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
     }
+    int mex = MEX(A, n);
+    // turn off all first == MEX+1 to last == MEX+ 1 to MEX
+    int last_ind = 0;
+    int first_ind = 0;
+    for (int i = 0; i < n; i++) {
+        last_ind = (A[i] == mex + 1) ? i : last_ind;
+    }
+    for (int i = n - 1; i >= 0; i--) {
+        first_ind = (A[i] == mex + 1) ? i : first_ind;
+    }
+    for (int i = first_ind; i <= last_ind; i++) {
+        A[i] = mex;
+    }
+    cout << (MEX(A, n) == mex + 1 ? "YES" : "NO") << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
