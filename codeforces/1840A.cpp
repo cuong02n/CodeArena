@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 19-08-2023  19:20:47  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,36 +32,20 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
+    string x;
     int n;
-    cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
+    cin >> n >> x;
+    string res = "";
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
+        int j = i + 1;
+        while (x[j] != x[i]) {
+            j++;
         }
+        res += x[i];
+        i = j;
     }
-    if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
-    }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -91,9 +75,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

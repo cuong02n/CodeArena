@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 14-08-2023  13:13:28  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,36 +32,33 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
+using p = pair<long double, long double>;
+long double distance(p x, p y) {
+    long double k = sqrt((x.first - y.first) * (x.first - y.first) + (x.second - y.second) * (x.second - y.second));
+    return k;
+}
+long double area(p x, p y, p z) {
+    long double d1 = distance(x, y);
+    long double d2 = distance(y, z);
+    long double d3 = distance(x, z);
+    long double d = (d1 + d2 + d3) / 2;
+    long double k = sqrt(d * (d - d1) * (d - d2) * (d - d3));
+    return k;
+}
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
+    p A[n];
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
+        cin >> A[i].first;
+        cin >> A[i].second;
     }
-    if (n % 2) {
-        res.push_back({n, n});
+
+    long double sum = 0;
+    for (int i = 1; i < n - 1; i++) {
+        sum += area(A[0], A[i], A[i + 1]);
     }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
-    }
+    cout << setprecision(10) << sum << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -85,7 +82,6 @@ int main() {
 #endif
 
     int t = 1;
-    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

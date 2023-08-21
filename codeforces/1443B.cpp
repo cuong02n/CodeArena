@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 14-08-2023  16:34:44  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,41 +32,56 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
-    }
-    if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
-    }
+    int a, b;
+    cin >> a >> b;
+    string x;
+    cin >> x;
+    int n = x.length();
     if (!v && all_case == all_cases) {
         return;
     }
+    int dp[2][n];  // dp[0][i]: only active mine, no put
+                   // dp[1][i]: connect with last mine, put all of mine
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < n; j++) {
+            dp[i][j] = 0;
+        }
+    }
+    int last_mine = -1;
+    for (int i = n - 1; i >= 0; i--) {
+        if (x[i] == '1') {
+            last_mine = i;
+            break;
+        }
+    }
+    for (int i = 0, last_mine = -1; i < n; i++) {
+        if (x[i] - '0') {
+            if (last_mine == -1) {
+                dp[0][i] = a;
+                dp[1][i] = a;
+            } else {
+                int dif = i - last_mine - 1;
+                if (dif == 0) {
+                    dp[0][i] = dp[0][i - 1];
+                    dp[1][i] = dp[1][i - 1];
+                } else {
+                    dp[0][i] = min(dp[0][last_mine] + a, dp[1][last_mine] + a);  // active
+                    dp[1][i] = min(dp[0][last_mine] + dif * b, dp[1][last_mine] + dif * b);
+                }
+            }
+            last_mine = i;
+        }
+    }
+    // _print(dp[0], dp[0] + n);
+    // cout << endl;
+    // _print(dp[1], dp[1] + n);
+    // cout << endl;
+    cout << min(dp[0][last_mine], dp[1][last_mine]) << endl;
+
     if (v && all_case == all_cases) {
-        _verbose();
+        cout << a << " " << b << endl;
+        cout << x << endl;
     }
 }
 
@@ -91,9 +106,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

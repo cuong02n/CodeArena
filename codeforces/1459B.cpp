@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 14-08-2023  18:58:16  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -29,39 +29,21 @@ void _print(it begin, it end) {
 void _verbose() {
 }
 
+int res[1005];
+
+void precalc() {
+}
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
-    }
-    if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
-        cout << -1 << endl;
+    if (n == 1 || n == 2) {
+        cout << 4 << endl;
         return;
     }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
-    }
+    cout << ((2 * ((n + 1) / 2) + 1) * (2 * ((n + 1) / 2) + 1) / 2 + 1 - n % 2) << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -85,7 +67,7 @@ int main() {
 #endif
 
     int t = 1;
-    cin >> t;
+    precalc();
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

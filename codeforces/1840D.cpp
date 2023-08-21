@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 16-08-2023  22:05:36  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -18,6 +18,10 @@ ostream& operator<<(ostream& os, tuple<T1, T2, T3> A) {
     os << "{ " << get<0>(A) << ", " << get<1>(A) << ", " << get<2>(A) << " }";
     return os;
 }
+template <class T>
+T max(T a, T b, T c) {
+    return max(a, max(b, c));
+}
 
 template <class it>
 void _print(it begin, it end) {
@@ -32,36 +36,50 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
+int cal(vector<int>& B, int begin, int end) {
+    if (begin >= end) return 0;
+    return B[end] - B[begin];
+}
+int cal3(vector<int>& B, int x, int y) {
+    return max(cal(B, 0, x - 1), cal(B, x, y - 1), cal(B, y, B.size() - 1));
+}
+int cal2(vector<int>& B, int begin, int value) {
+    return max(cal(B, begin, value - 1), cal(B, value, B.size() - 1));
+}
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
+    set<int> A;
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
+        int x;
+        cin >> x;
+        A.insert(x);
     }
-    if (n % 2) {
-        res.push_back({n, n});
+    vector<int> B;
+    for (auto it = A.rbegin(); it != A.rend(); it++) {
+        B.push_back(*it);
     }
-    if (sum % 2) {
-        cout << -1 << endl;
+    if (B.size() <= 3) {
+        cout << 0 << endl;
         return;
     }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
+    int res = INT_MAX;
+    n = B.size();
+    int v3 = cal3(B, 1, 2);
+    for (int i = 1; i < n - 1; i++) {
+        int l = i;
+        int r = n - 2;
+        int mid = l + r >> 1;
+        int v2 = cal2(B, l, r);
+        while (l < r) {
+            int _1 = cal2(B, l, mid);
+            int _2 = cal2(B, mid + 1, r);
+            if(_1)            
+        }
+        v3 = min(v3, cal3(B, i, mid));
     }
+    // find the index end the segment first and second.
+    // find i , j : max(A[i-1] - A[0],A[j-1] - A[i],A[n-1] - A[j]) is min
     if (!v && all_case == all_cases) {
         return;
     }
@@ -91,9 +109,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

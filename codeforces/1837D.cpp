@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 17-08-2023  10:30:55  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -34,34 +34,51 @@ int verbose = -1;
 int all_cases = -1;
 using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
+    // a : "("
+    // b : ")"
+    // beautiful if and only if a == b && last!=first
     int n;
-    cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
-    }
+    string x;
+    cin >> n >> x;
     if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
         cout << -1 << endl;
         return;
     }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
+    int p[n];
+    p[0] = x[0] == '(' ? 1 : -1;
+    for (int i = 1; i < n; i++) {
+        p[i] = p[i - 1] + (x[i] == '(' ? 1 : -1);
     }
+    if (p[n - 1]) {
+        cout << -1 << endl;
+        return;
+    }
+    int res[n] = {};
+    int start = 0;
+    for (int i = 0; i < n; i++) {
+        if (!p[i]) {
+            for (int j = start; j <= i; j++) {
+                res[j] = (x[i] == ')' ? 1 : 2);
+            }
+            start = i + 1;
+        }
+    }
+    int flag = 1;
+    for (int i = 1; i < n; i++) {
+        if (res[i] != res[i - 1]) flag = 0;
+    }
+    if (!flag) {
+        cout << 2 << endl;
+        for (int i = 0; i < n; i++) {
+            cout << res[i] << " ";
+        }
+    } else {
+        cout << 1 << endl;
+        for (int i = 0; i < n; i++) {
+            cout << 1 << " ";
+        }
+    }
+    cout << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -91,9 +108,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

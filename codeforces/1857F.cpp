@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 19-08-2023  23:22:20  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -33,34 +33,44 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 using p = pair<int, int>;
+optional<pair<int, int>> quadratic(int a, int b, int c) {
+    long double delta = 1ll * b * b - 4ll * a * c;
+    if (a == 0 || round(delta) < 0)
+        return nullopt;
+    long double s = round(sqrt(delta));
+    return make_pair(round((-b + s) / 2 / a), (-b - s) / 2 / a);
+}
 void solve(bool v = false, int all_case = -1) {
+    map<int, int> cnt;
     int n;
     cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
+        int x;
+        cin >> x;
+        cnt[x]++;
+    }
+    int q;
+    cin >> q;
+    for (int i = 0; i < q; i++) {
+        ll x, y;
+        cin >> x >> y;
+        long double delta = 1ll * x * x - 4ll * y;
+        if (round(delta) < 0) {
+            cout << 0 << endl;
+            continue;
         }
-    }
-    if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
+        long double s = sqrt(round(delta));
+        ll r1 = (x + s) / 2;
+        ll r2 = (x - s) / 2;
+        if (r1 * r2 != y || r1 + r2 != x) {
+            cout << 0 << endl;
+            continue;
+        }
+        if (r1 == r2) {
+            cout << 1ll * cnt[r1] * (cnt[r1] - 1) / 2 << endl;
+            continue;
+        }
+        cout << 1ll * cnt[r1] * cnt[r2] << endl;
     }
     if (!v && all_case == all_cases) {
         return;
@@ -80,6 +90,7 @@ int main() {
     chrono::steady_clock::time_point start = chrono::steady_clock::now();
 
 #ifndef ONLINE_JUDGE
+
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
@@ -91,9 +102,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

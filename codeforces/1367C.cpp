@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 14-08-2023  20:48:13  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,36 +32,33 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
+inline int cal(int begin, int end, int k) {
+    return max(0, (end - begin) / k - 1);
+}
+
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
+    int n, k;
+    cin >> n >> k;
+    k++;
+    vector<int> num1;
+    string x;
+    cin >> x;
+    // x.length = n
+    for (int i = 0; i < x.length(); i++) {
+        if (x[i] - '0') num1.push_back(i);
     }
-    if (n % 2) {
-        res.push_back({n, n});
+    int res = 0;
+    for (int i = 0; i < -1 + (int)num1.size(); i++) {
+        int z = cal(num1[i], num1[i + 1], k);
+        // cout << "between " << num1[i] << " " << num1[i + 1] << "is " << z << endl;
+        res += z;
     }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
+    if (num1.size() == 0) {
+        res = 1 + (n - 1) / k;
+    } else {
+        res += num1[0] / k + (n - num1[num1.size() - 1] - 1) / k;
     }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
-    }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -91,9 +88,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

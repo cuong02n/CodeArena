@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 14-08-2023  11:22:46  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,36 +32,38 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
+    string A[2];
+    cin >> A[0];
+    cin >> A[1];
+    int dp[2][n];
+    for (int i = 0; i < 2; i++) {
+        for (int j = 1; j < n; j++) {
+            dp[i][j] = 0;
+        }
+    }
+    dp[0][0] = A[0][0] == 'B';
+    dp[1][0] = A[1][0] == 'B';
+    for (int i = 1; i < n; i++) {
+        if (A[0][i] == 'B') {
+            if (A[1][i] == 'B') {
+                dp[0][i] = dp[1][i - 1];
             } else {
-                res.push_back({i, i + 1});
+                dp[0][i] = dp[0][i - 1];
+            }
+        }
+        if (A[1][i] == 'B') {
+            if (A[0][i] == 'B') {
+                dp[1][i] = dp[0][i - 1];
+            } else {
+                dp[1][i] = dp[1][i - 1];
             }
         }
     }
-    if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
-    }
+    cout << (dp[0][n - 1] || dp[1][n - 1] ? "YES" : "NO") << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }

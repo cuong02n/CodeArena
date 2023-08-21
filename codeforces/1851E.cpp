@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 20-08-2023  00:06:00  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,36 +32,61 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
-void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
-    }
-    if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
-        cout << -1 << endl;
+
+void dfs(ll res[], int cost[], int i, int n, vector<int> adj[]) {
+    if (res[i] != LLONG_MAX) return;
+    if (cost[i] == 0) {
+        res[i] = 0;
         return;
     }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
+    if (adj[i].empty()) {
+        res[i] = cost[i];
+        return;
     }
+
+    ll v = 0;
+    for (int x : adj[i]) {
+        dfs(res, cost, x, n, adj);
+        v += res[x];
+    }
+    res[i] = min((ll)cost[i], min(v, res[i]));
+}
+void solve(bool v = false, int all_case = -1) {
+    int n, k;
+    cin >> n >> k;
+    int c[n + 1];
+    for (int i = 1; i < n + 1; i++) {
+        cin >> c[i];
+    }
+
+    vector<int> adj[n + 1];
+    for (int i = 1; i < k + 1; i++) {
+        int x;
+        cin >> x;
+        c[x] = 0;
+    }
+    for (int i = 1; i <= n; i++) {
+        int m;
+        cin >> m;
+        for (int j = 0; j < m; j++) {
+            int x;
+            cin >> x;
+            adj[i].push_back(x);
+        }
+    }
+    ll res[n + 1];
+    for (int i = 1; i < n + 1; i++) {
+        res[i] = LLONG_MAX;
+    }
+    for (int i = 1; i < n + 1; i++) {
+        if (res[i] == LLONG_MAX) {
+            dfs(res, c, i, n, adj);
+        }
+    }
+    for (int i = 1; i < 1 + n; i++) {
+        cout << res[i] << " ";
+    }
+    cout << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -91,9 +116,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

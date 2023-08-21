@@ -1,13 +1,13 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 14-08-2023  12:51:00  UTC: +7
 */
 #include <bits/stdc++.h>
 
 using namespace std;
 using ll = long long;
 using ull = unsigned long long;
-
+#define pi 3.141592653589;
 template <class T1, class T2>
 ostream& operator<<(ostream& os, pair<T1, T2> A) {
     os << "{ " << A.first << ", " << A.second << " }";
@@ -32,35 +32,13 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
-    }
-    if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
+    long double x, y;
+    cin >> x >> y;
+    if (y >= 0) {
+        cout << setprecision(10) << acos(x / (sqrt(x * x + y * y))) << endl;
+    } else {
+        cout << setprecision(10) << (2 * 3.141592653589 - acos(x / (sqrt(x * x + y * y)))) << endl;
     }
     if (!v && all_case == all_cases) {
         return;
@@ -85,7 +63,6 @@ int main() {
 #endif
 
     int t = 1;
-    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

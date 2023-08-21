@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 14-08-2023  12:59:40  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,36 +32,13 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
-    }
-    if (n % 2) {
-        res.push_back({n, n});
-    }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
-    }
+    long double x0, y0, x1, y1;
+    cin >> x0 >> y0 >> x1 >> y1;
+    long double z = (x0 * x1 + y0 * y1) / (sqrt(x0 * x0 + y0 * y0) * sqrt(x1 * x1 + y1 * y1));
+    if (z > 1) z = 1;
+    if (z < -1) z = -1;
+    cout << setprecision(7) << acos(z) << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -85,7 +62,6 @@ int main() {
 #endif
 
     int t = 1;
-    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 20-08-2023  11:06:37  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -33,34 +33,30 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 using p = pair<int, int>;
+using tp = tuple<int, int, int>;
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
-        }
+    vector<int> adj[n + 1];
+    p A[n + 1] = {};
+    for (int i = 0; i < n - 1; i++) {
+        int x, y;
+        cin >> x >> y;
+        adj[x].push_back(y);
+        adj[y].push_back(x);
     }
-    if (n % 2) {
-        res.push_back({n, n});
+
+    queue<tp> x;
+    for (int i = 0; i < adj[1].size(); i++) {
+        x.push(tp(1, adj[1][i], 1));
     }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
+    int res = 0;
+    int _time = 0;
+    while (!x.empty()) {
+        res++;
+        tp q = x.front();
+        x.pop();
+        int flag = 0;
     }
     if (!v && all_case == all_cases) {
         return;
@@ -91,9 +87,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

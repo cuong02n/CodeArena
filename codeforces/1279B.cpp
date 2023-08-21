@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 13-08-2023  10:51:09  UTC: +7
+    created : 15-08-2023  08:51:11  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -34,34 +34,37 @@ int verbose = -1;
 int all_cases = -1;
 using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    vector<p> res;
-    int A[n];
-    int sum = 0;
-    for (int i = 0; i < n; i++) {
+    int n, s;
+    cin >> n >> s;
+
+    int A[n + 1] = {0};
+    ll sum[n + 1] = {0};
+    p _max[n + 1];
+    for (int i = 0; i < n + 1; i++) {
+        _max[n + 1] = {0, 0};
+    }
+    for (int i = 1; i <= n; i++) {
         cin >> A[i];
-        sum += (i % 2) ? -A[i] : A[i];
-        if (i % 2) {
-            if (A[i] != A[i - 1]) {
-                res.push_back({i, i});
-                res.push_back({i + 1, i + 1});
-            } else {
-                res.push_back({i, i + 1});
-            }
+        sum[i] = sum[i - 1] + A[i];
+        if (_max[i - 1].first < A[i]) {
+            _max[i] = {A[i], i};
+        } else {
+            _max[i] = _max[i - 1];
         }
     }
-    if (n % 2) {
-        res.push_back({n, n});
+    for (int i = n; i >= 0; i--) {
+        if (sum[i] <= s) {
+            cout << 0 << endl;
+            return;
+        }
+        if (sum[i] - _max[i].first <= s) {
+            cout << _max[i].second << endl;
+            // cout << "remove : " << _max[i].second << " , the last index: " << i << endl;
+            return;
+        }
     }
-    if (sum % 2) {
-        cout << -1 << endl;
-        return;
-    }
-    cout << res.size() << endl;
-    for (int i = 0; i < res.size(); i++) {
-        cout << res[i].first << " " << res[i].second << endl;
-    }
+
+    // max ()
     if (!v && all_case == all_cases) {
         return;
     }
@@ -91,9 +94,9 @@ int main() {
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }
