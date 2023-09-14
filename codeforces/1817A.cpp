@@ -1,10 +1,9 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 27-08-2023  14:05:52  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
-
 using namespace std;
 using ll = long long;
 using ull = unsigned long long;
@@ -37,31 +36,34 @@ void precalc() {
 }
 using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
-        }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
-            }
-            res++;
+    int n, q;
+    cin >> n >> q;
+    int A[n];
+    map<int, int> B;
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+    }
+    B[-1] = 0;
+    B[0] = 0;
+    B[1] = 0;
+    for (int i = 1; i < n - 1; i++) {
+        if (A[i - 1] >= A[i] && A[i] >= A[i + 1]) {
+            B[i] = B[i - 1] + 1;
+        } else {
+            B[i] = B[i - 1];
         }
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    for (int i = 0; i < q; i++) {
+        int l, r;
+        cin >> l >> r;
+        l--, r--;
+        if (l == r) {
+            cout << 1 << endl;
+            continue;
+        }
+        cout << r - l + 1 - B[r - 1] + B[l] << endl;
+    }
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -84,8 +86,8 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

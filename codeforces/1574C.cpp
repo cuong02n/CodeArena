@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 02-09-2023  17:38:47  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -35,33 +35,35 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
-        }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
-            }
-            res++;
-        }
+    ll A[n];
+    ll sum = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+        sum += A[i];
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    sort(A, A + n);
+    int m;
+    cin >> m;
+    for (int i = 0; i < m; i++) {
+        ll x, y;
+        cin >> x >> y;
+        ll res = 0;
+        auto it = lower_bound(A, A + n, x);
+        if (it == A) {
+            res = max(0ll, y - (sum - *it));
+        } else if (it == A + n) {
+            it = A + n - 1;
+            res = (x - *it + max(0ll, y - (sum - *it)));
+        } else {
+            auto it2 = --it;
+            it++;
+            res = min(x - *it2 + max(y - (sum - *it2), 0ll), max(y - (sum - *it), 0ll));
+        }
+        cout << res << endl;
+    }
     if (!v && all_case == all_cases) {
         return;
     }

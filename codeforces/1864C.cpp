@@ -1,9 +1,8 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 26-08-2023  22:31:04  UTC: +7
 */
 #include <bits/stdc++.h>
-#define all(A) (A).begin(), (A).end()
 
 using namespace std;
 using ll = long long;
@@ -35,33 +34,44 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-using p = pair<int, int>;
-void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
+int _f(int x) {
     int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
-        }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
-            }
-            res++;
-        }
+    while (x != 1) {
+        x >>= 1;
+        res++;
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    return 1 << res;
+}
+
+int _get(int x) {
+    for (int i = 0; i < 32; i++) {
+        if (x % 2) {
+            return 1 << i;
+        }
+        x >>= 1;
+    }
+}
+void solve(bool v = false, int all_case = -1) {
+    int x;
+    cin >> x;
+    int base = _f(x);
+    vector<int> res;
+    res.push_back(x);
+    while (x != 0) {
+        int k = _get(x);
+        if (k == base) {
+            break;
+        }
+        x -= k;
+        res.push_back(x);
+    }
+    while (x != 1) {
+        x >>= 1;
+        res.push_back(x);
+    }
+    cout << res.size() << endl;
+    _print(res.begin(), res.end());
+    cout << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -84,8 +94,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

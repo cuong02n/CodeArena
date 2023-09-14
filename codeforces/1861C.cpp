@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 31-08-2023  21:53:20  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -35,33 +35,52 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
+    string x;
+    cin >> x;
+    set<int> ind0;
+    int min_sorted = 0;
+    int tmp_sorted = 0;
+    bool res = true;
+    for (int i = 0, cur_size = 0, last_cmp = -1, lst_sorted = 0; i < x.length(); i++) {
+        if (x[i] == '+') {
+            cur_size++;
         }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
+        if (x[i] == '-') {
+            ind0.erase(cur_size);
+            cur_size--;
+        }
+        if (last_cmp == 1) {
+            // lst_sorted
+            if (x[i] == '+') {
+                tmp_sorted++;
+            } else if (x[i] == '-') {
+                tmp_sorted--;
             }
-            res++;
+            min_sorted = min(min_sorted, tmp_sorted);
         }
+
+        if (x[i] == '1') {
+            lst_sorted = cur_size;
+            min_sorted = cur_size;
+            tmp_sorted = cur_size;
+            last_cmp = 1;
+            if (ind0.empty()) continue;
+            if (*(ind0.begin()) <= cur_size) res = false;
+        } else if (x[i] == '0') {
+            last_cmp = 0;
+            if (cur_size < 2) res = false;
+            ind0.insert(cur_size);
+            // cout << "current size = " << cur_size << " min_st" << min_sorted << endl;
+            if (cur_size <= min_sorted) res = false;
+        }
+        // cout << "after index " << i << ", 2 sets are: " << endl;
+        // _print(ind0.begin(), ind0.end());
+        // cout << endl;
+        // _print(ind1.begin(), ind1.end());
+        // cout << endl;
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    cout << (res ? "YES" : "NO") << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -84,8 +103,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

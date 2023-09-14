@@ -93,5 +93,6 @@
     },
     "cSpell.words": [
         "kadane"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "disabled"
 }

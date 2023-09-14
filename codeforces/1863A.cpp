@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 30-08-2023  21:41:38  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -35,33 +35,43 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
+    int n, a, q;
+    cin >> n >> a >> q;
+    string x;
+    cin >> x;
+    // q = x.length
+    int i1 = a;
+    int r1 = 0;
+    for (int i = 0; i < q; i++) {
+        if (x[i] == '-') {
+            i1--;
+        } else if (x[i] == '+') {
+            i1++;
         }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
+        r1 = max(i1, r1);
+    }
+    i1 = max(r1, a);
+    int i2 = a;
+    bool flag_sub = false;
+    for (int i = 0; i < q; i++) {
+        if (x[i] == '-') {
+            if (!flag_sub) {
+                flag_sub = true;
             }
-            res++;
+        } else {
+            i2++;
         }
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    if (a == 0 && flag_sub) i2--;
+    // cout << "i1 = " << i1    << " i2 " << i2 << endl;
+    if (i2 < n) {
+        cout << "NO" << endl;
+    } else if (i1 >= n) {
+        cout << "YES" << endl;
+    } else if (i1 < n) {
+        cout << "MAYBE" << endl;
+    }
     if (!v && all_case == all_cases) {
         return;
     }
@@ -84,8 +94,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

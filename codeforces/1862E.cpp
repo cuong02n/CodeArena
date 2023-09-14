@@ -1,9 +1,8 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 24-08-2023  23:01:49  UTC: +7
 */
 #include <bits/stdc++.h>
-#define all(A) (A).begin(), (A).end()
 
 using namespace std;
 using ll = long long;
@@ -27,47 +26,40 @@ void _print(it begin, it end) {
     }
 }
 
-void _verbose() {
-}
-
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-using p = pair<int, int>;
-void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
+void solve() {
+    ll n, m, d;
+    cin >> n >> m >> d;
+    ll A[n + 1];
+    for (int i = 1; i <= n; i++) {
+        cin >> A[i];
+    }
+    multiset<ll> B;
+    ll sum = 0;
+    ll res = 0;
+    for (int i = 1; i <= n; i++) {
+        if (A[i] <= 0) {
+            continue;
         }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
+        if (B.size() == m) {
+            auto it = B.begin();
+            if (A[i] <= *it) {
+                continue;
             }
-            res++;
+            sum = sum - *it + A[i];
+            B.erase(it);
+            B.insert(A[i]);
+        } else {
+            B.insert(A[i]);
+            sum += A[i];
         }
+        res = max(res, sum - d * i);
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
-    if (!v && all_case == all_cases) {
-        return;
-    }
-    if (v && all_case == all_cases) {
-        _verbose();
-    }
+    cout << res << endl;
 }
 
 void reset() {
@@ -84,24 +76,19 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";
 #endif
-        if (verbose == i + 1) {
-            solve(true, t);
-        } else {
-            solve(false, t);
-        }
-        reset();
+        solve();
     }
     chrono::steady_clock::time_point end = chrono::steady_clock::now();
 #ifndef ONLINE_JUDGE
     chrono::duration<double> time_span = chrono::duration_cast<std::chrono::duration<double>>(end - start);
     cout << "time use: " << time_span.count() << endl;
 #endif
-
     return 0;
 }

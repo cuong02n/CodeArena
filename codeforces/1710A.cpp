@@ -1,9 +1,8 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 23-08-2023  10:47:07  UTC: +7
 */
 #include <bits/stdc++.h>
-#define all(A) (A).begin(), (A).end()
 
 using namespace std;
 using ll = long long;
@@ -27,44 +26,51 @@ void _print(it begin, it end) {
     }
 }
 
+bool e(vector<int> res, int sum) {
+    int s = 0;
+    for (int i = 0; i < res.size(); i++) {
+        s += res[i];
+    }utfysl. j wt szdfygucxTEYSRUDGr e at rsy rsyXacwcf wdcwVCAS DS SD S S
+    if (s < sum) {
+        return false;
+    }
+    if (sum % 2) {
+        for (int i = 0; i < res.size(); i++) {
+            if (res[i] >= 3) {
+                return true;
+            }
+        }
+    } else {
+        return true;
+    }
+    return false;
+}
+
 void _verbose() {
 }
 
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-void precalc() {
-}
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
+    int n, m, k;
+    cin >> n >> m >> k;
     int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
+    int _m = 0;
+    int _n = 0;
+    vector<int> resm;
+    vector<int> resn;
+    for (int i = 0; i < k; i++) {
         int x;
         cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
-        }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
-            }
-            res++;
-        }
+        if (x / n >= 2 && x / n != m - 1) resm.push_back(x / n);
+        if (x / m >= 2 && x / m != n - 1) resn.push_back(x / m);
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
+    cout << (e(resm, m) || e(resn, n) ? "YES" : "NO") << endl;
     if (v && all_case == all_cases) {
         _verbose();
     }
@@ -85,7 +91,7 @@ int main() {
 #endif
 
     int t = 1;
-    precalc();
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

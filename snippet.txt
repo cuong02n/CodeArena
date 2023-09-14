@@ -23,6 +23,7 @@
 			"    created : ${CURRENT_DATE}-$CURRENT_MONTH-$CURRENT_YEAR  $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND  UTC: +7",
 			"*/",
 			"#include <bits/stdc++.h>",
+			"#define all(A) (A).begin(), (A).end()",
 			"",
 			"using namespace std;",
 			"using ll = long long;",
@@ -52,6 +53,9 @@
 			"int MOD = 1e9 + 7;",
 			"int verbose = -1;",
 			"int all_cases = -1;",
+			"void precalc(){",
+			"    ",
+			"}",
 			"void solve(bool v = false, int all_case = -1) {",
 			"    $0",
 			"    if (!v && all_case == all_cases) {",
@@ -76,6 +80,7 @@
 			"    freopen(\"output.txt\", \"w\", stdout);",
 			"#endif",
 			"",
+			"    precalc();",
 			"    int t = 1;",
 			"    cin >> t;",
 			"    for (int i = 0; i < t; i++) {",
@@ -109,6 +114,7 @@
 			"    created : ${CURRENT_DATE}-$CURRENT_MONTH-$CURRENT_YEAR  $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND  UTC: +7",
 			"*/",
 			"#include <bits/stdc++.h>",
+			"#define all(A) (A).begin(), (A).end()",
 			"",
 			"using namespace std;",
 			"using ll = long long;",
@@ -138,6 +144,9 @@
 			"int MOD = 1e9 + 7;",
 			"int verbose = -1;",
 			"int all_cases = -1;",
+			"void precalc(){",
+			"    ",
+			"}",
 			"void solve(bool v = false, int all_case = -1) {",
 			"    $0",
 			"    if (!v && all_case == all_cases) {",
@@ -163,6 +172,7 @@
 			"#endif",
 			"",
 			"    int t = 1;",
+			"    precalc();",
 			"    for (int i = 0; i < t; i++) {",
 			"#ifndef ONLINE_JUDGE",
 			"        cout << \"case \" << i + 1 << \": \";",
@@ -189,15 +199,13 @@
 	"cout flag YES/NO": {
 		"prefix": "cout_f()",
 		"body": [
-			"cout << (flag ? \"YES\" : \"NO\") << endl;",
-			"$0"
+			"cout << (flag ? \"YES\" : \"NO\") << endl;"
 		]
 	},
 	"pause": {
 		"prefix": "system pause",
 		"body": [
 			"system(\"pause\");",
-			""
 		]
 	},
 	"async, 0 tie": {

@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 10-09-2023  21:52:16  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -35,33 +35,33 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-using p = pair<int, int>;
+using p = pair<ll, ll>;
+inline ll cal(p x, p y) {
+    return abs(x.first - y.first) + abs(x.second - y.second);
+}
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
+    vector<p> major;
+    int n, k, a, b;
+    cin >> n >> k >> a >> b;
+    p start;
+    p end;
+    for (int i = 1; i <= n; i++, k--) {
+        ll x, y;
+        cin >> x >> y;
+        if (k > 0) {
+            major.push_back({x, y});
         }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
-            }
-            res++;
-        }
+        if (i == a) start = {x, y};
+        if (i == b) end = {x, y};
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    ll res = cal(start, end);
+    ll min_s = 100000000000LL;
+    ll min_e = 100000000000LL;
+    for (p x : major) {
+        min_s = min(min_s, cal(start, x));
+        min_e = min(min_e, cal(x, end));
+    }
+    cout << min(res, min_s + min_e) << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -84,8 +84,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

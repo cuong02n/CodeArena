@@ -1,9 +1,8 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 26-08-2023  23:02:16  UTC: +7
 */
 #include <bits/stdc++.h>
-#define all(A) (A).begin(), (A).end()
 
 using namespace std;
 using ll = long long;
@@ -35,33 +34,51 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+using vvb = vector<vector<bool>>;
+
 using p = pair<int, int>;
+
+vector<vector<bool>> A;
+int f[3000][3000];
+
+int get(int i, int j, int n) {
+    if (i < 0 || j < 0 || i >= n || j >= n) {
+        return 0;
+    }
+    return f[i][j];
+}
 void solve(bool v = false, int all_case = -1) {
     int n;
     cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
+    A.assign(n, vector<bool>(n, true));
+
+    for (int i = 0; i < n; i++) {
+        string x;
         cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
-        }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
-            }
-            res++;
+        for (int j = 0; j < n; j++) {
+            A[i][j] = x[j] == '1';
         }
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    int res = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            f[i][j] = 0;
+        }
+    }
+
+    for (int i = n - 1; i >= 0; i--) {
+        for (int j = 0; j < n; j++) {
+            f[i][j] = A[n - 1][j] ? 1 : 0 + get(i + 1, j, n) + get(i + 1, j - 1, n) + get(i + 1, j + 1, n) - 2 * get(i + 2, j, n) - get(i + 2, j - 1, n) - get(i + 2, j + 1, n);
+        }
+    }
+    for (int i = 0; i < n;i++){
+        for(int j = 0; j < n; j++){
+            cout << f[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+        cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -84,8 +101,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

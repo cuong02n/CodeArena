@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 27-08-2023  20:03:35  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -35,33 +35,48 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+
+int ss(int n) {
+    int sum = 0;
+    while (n != 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
+}
 using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
-        }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
-            }
-            res++;
+    int n, q;
+    cin >> n >> q;
+    int A[n + 1];
+    set<int> s;
+    for (int i = 1; i < n + 1; i++) {
+        cin >> A[i];
+        if (A[i] > 9) {
+            s.insert(i);
         }
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    int m, l, r, j;
+    for (int i = 0; i < q; i++) {
+        cin >> j;
+        if (j - 2) {
+            cin >> l >> r;
+            int lst = l;
+            while (!s.empty()) {
+                auto it = s.lower_bound(lst);
+                if (it == s.end() || *it > r) break;
+                A[*it] = ss(A[*it]);
+                lst = *it;
+                s.erase(it);
+                if (A[lst] > 9) s.insert(lst);
+                lst++;
+            }
+        } else {
+            cin >> m;
+            cout << A[m] << endl;
+        }
+    }
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -84,8 +99,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

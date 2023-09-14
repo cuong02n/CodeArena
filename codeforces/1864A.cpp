@@ -1,9 +1,8 @@
 /*
     author : cuong2905say
-    created : 28-08-2023  15:03:22  UTC: +7
+    created : 26-08-2023  21:35:59  UTC: +7
 */
 #include <bits/stdc++.h>
-#define all(A) (A).begin(), (A).end()
 
 using namespace std;
 using ll = long long;
@@ -35,33 +34,22 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    cin >> n;
-    // vector<int> A(n, 0);
-    int res = 0;
-    int s = -1;
-    for (int i = 0, h2 = 0; i < n; i++) {
-        int x;
-        cin >> x;
-        if (s == -1) {
-            s = x;
-            if (!s) continue;
-        }
-        if (x == 2) h2 = 1;
-        if (x == 0) {
-            if (s == 0 && h2 == 0) {
-                s = 0;
-            } else if (s || h2) {
-                s = -1;
-                h2 = 0;
-            }
-            res++;
-        }
+    int x, y, n;
+    cin >> x >> y >> n;
+    int res[n];
+    res[n - 1] = y;
+    for (int i = n - 2, step = 1; i >= 0; i--, step++) {
+        res[i] = res[i + 1] - step;
     }
-    res += (s != -1) ? 1 : 0;
-    cout << max(res, 1) << endl;
+    if (res[0] < x) {
+        cout << -1 << endl;
+        return;
+    }
+    res[0] = x;
+    _print(res, res + n);
+
+    cout << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -84,8 +72,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    int t = 1;
     precalc();
+    int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";
