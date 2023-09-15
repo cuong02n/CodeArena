@@ -35,7 +35,7 @@ int main() {
     int A[] = {1, 5, 2, 7, 4, 4, 9, 8, 4};
     int n = sizeof(A) / sizeof(A[0]);
     int tmp[n];
-    quick_sort(A, 0, n - 1, tmp);
+    merge_sort(A, 0, n - 1, tmp);
     _print(A, A + n);
     cout << "inv : " << inv << endl;
     return 0;

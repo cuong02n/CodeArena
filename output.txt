@@ -1,0 +1,9 @@
+case 1: 12
+case 2: -3
+case 3: 44
+case 4: 0
+case 5: 393
+case 6: 87
+case 7: 179179179436104
+case 8: -6
+time use: 0.0006138
