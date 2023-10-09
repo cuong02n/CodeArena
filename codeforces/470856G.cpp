@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 05-10-2023  10:42:32  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -35,17 +42,39 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+
+bool check(int A[], int x, int m, int n) {
+    int u[n + 1] = {};
+    long long d = 0;
+    for (int i = 0; i < m; i++) {
+        if (u[A[i]] < x) {
+            u[A[i]]++;
+            d++;
+        }
+    }
+    long long free = 0;
+    for (int i = 1; i <= n; i++) {
+        free += (x - u[i]) / 2;
+    }
+    return (d + free) >= m;
+}
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
-    for (int i = 0; i < n; i++) {
+    int n, m;
+    cin >> n >> m;
+    int A[m];
+    for (int i = 0; i < m; i++) {
         cin >> A[i];
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    int l = 1, r = 2 * m;
+    while (l <= r) {
+        int mid = (l + r) >> 1;
+        if (check(A, mid, m, n))
+            r = mid - 1;
+        else
+            l = mid + 1;
     }
+    cout << l << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +86,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);

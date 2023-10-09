@@ -1,14 +1,14 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 30-09-2023  12:38:15  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
 using ull = unsigned long long;
-
 template <class T1, class T2>
 ostream& operator<<(ostream& os, pair<T1, T2> A) {
     os << "{ " << A.first << ", " << A.second << " }";
@@ -27,6 +27,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -35,17 +41,31 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
+    int n = sc;
+    p A[n];
+    // first : max value of array
+    // second: size of array
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
+        int k = sc;
+        A[i] = make_pair(0, 0);
+        for (int j = 0; j < k; j++) {
+            int x = sc;
+            A[i].first = max(A[i].first, x - j + 1);
+            A[i].second++;
+        }
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    sort(A, A + n);
+    int res = 0;
+    int rating = 0;
+    for (int i = 0; i < n; i++) {
+        // res = max(res, res + A[i].first - rating);
+        // rating += res + A[i].second;
+        res = max(rating, A[i].first);
+        rating = res + A[i].second;
     }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +77,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);

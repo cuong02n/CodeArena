@@ -1,42 +1,81 @@
+/*
+    author : cuong2905say
+    created : 17-09-2023  09:56:32  UTC: +7
+*/
 #include <bits/stdc++.h>
+#define all(A) (A).begin(), (A).end()
+
 using namespace std;
-int inv = 0;
-void merge(int A[], int l, int m, int r, int tmp[]) {
-    for (int k = l, i = l, j = m + 1; k <= r; k++) {
-        if (i > m) {
-            tmp[k] = A[j++];
-        } else if (j > r || A[i] <= A[j]) {
-            tmp[k] = A[i++];
-        } else {
-            inv += m - i + 1;
-            tmp[k] = A[j++];
-        }
-    }
-    for (int i = l; i <= r; i++) {
-        A[i] = tmp[i];
-    }
+using ll = long long;
+using ull = unsigned long long;
+
+template <class T1, class T2>
+ostream& operator<<(ostream& os, pair<T1, T2> A) {
+    os << "{ " << A.first << ", " << A.second << " }";
+    return os;
 }
-void merge_sort(int A[], int l, int r, int tmp[]) {
-    if (l < r) {
-        int m = l + r >> 1;
-        merge_sort(A, l, m, tmp);
-        merge_sort(A, m + 1, r, tmp);
-        merge(A, l, m, r, tmp);
-    }
+template <class T1, class T2, class T3>
+ostream& operator<<(ostream& os, tuple<T1, T2, T3> A) {
+    os << "{ " << get<0>(A) << ", " << get<1>(A) << ", " << get<2>(A) << " }";
+    return os;
 }
+
 template <class it>
 void _print(it begin, it end) {
     for (it i = begin; i != end; i++) {
         cout << *i << " ";
     }
 }
-int main() {
+
+void _verbose() {
+}
+
+int MOD = 1e9 + 7;
+int verbose = -1;
+int all_cases = -1;
+void precalc() {
+}
+void solve(bool v = false, int all_case = -1) {
+    cout << (7 ^ 10 ^ 26 ^ 50) << endl;
+    cout << (7 ^ 10) << endl;
+    cout << (26 ^ 50) << endl;
+    cout << (37 ^ 13) << endl;
+    if (!v && all_case == all_cases) {
+        return;
+    }
+    if (v && all_case == all_cases) {
+        _verbose();
+    }
+}
+
+void reset() {
+}
+
+signed main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    chrono::steady_clock::time_point start = chrono::steady_clock::now();
+
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
-    int A[] = {1, 5, 2, 7, 4, 4, 9, 8, 4};
-    int n = sizeof(A) / sizeof(A[0]);
-    int tmp[n];
-    quick_sort(A, 0, n - 1, tmp);
-    _print(A, A + n);
-    cout << "inv : " << inv << endl;
+#endif
+
+    precalc();
+    int t = 1;
+    for (int i = 0; i < t; i++) {
+        if (verbose == i + 1) {
+            solve(true, t);
+        } else {
+            solve(false, t);
+        }
+        reset();
+    }
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+#ifndef ONLINE_JUDGE
+    chrono::duration<double> time_span = chrono::duration_cast<std::chrono::duration<double>>(end - start);
+#endif
+
     return 0;
 }

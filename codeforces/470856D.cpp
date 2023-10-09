@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 30-09-2023  00:23:02  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -36,16 +43,35 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
+    int n, m, x, y;
+    cin >> n >> m >> x >> y;
+    int single_not_draw = 0;
+    int double_now_draw = 0;
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
+        string a;
+        cin >> a;
+        // length of a = m
+        int not_draw = 0;
+        for (int j = 0; j < m; j++) {
+            if (a[j] == '.') not_draw++;
+        }
+        int _double = 0;
+        for (int j = 0, lst_not_draw = 0; j < m; j++) {
+            if (a[j] == '.') {
+                if (lst_not_draw) {
+                    _double++;
+                    lst_not_draw = 0;
+                } else {
+                    lst_not_draw = 1;
+                }
+            } else {
+                lst_not_draw = 0;
+            }
+        }
+        single_not_draw += not_draw - _double * 2;
+        double_now_draw += _double;
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
-    }
+    cout << single_not_draw * x + double_now_draw * min(2 * x, y) << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +83,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);

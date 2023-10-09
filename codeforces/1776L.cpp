@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 17-09-2023  17:39:26  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -35,17 +42,45 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+inline void yes() {
+    cout << "YES" << endl;
+}
+inline void no() {
+    cout << "NO" << endl;
+}
+#define int long long
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
+    int n = sc;
+    string x;
+    cin >> x;
+    int k = 0;
+    int k1 = 0;
+    int k2 = 0;
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
+        k += (x[i] == '+') ? 1 : -1;
+        k1 += (x[i] == '+') ? 1 : 0;
+        k2 += (x[i] == '-') ? 1 : 0;
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    int q = sc;
+    for (int i = 0; i < q; i++) {
+        int a = sc;
+        int b = sc;
+        if (a == b) {
+            if (k == 0)
+                yes();
+            else
+                no();
+        } else {
+            long double sol = 1.0 * k * b / (a - b);
+            int f = floor(sol);
+            int c = ceil(sol);
+            if (f == c && -k1 <= f && f <= k2)
+                yes();
+            else
+                no();
+        }
     }
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +92,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
@@ -68,9 +103,8 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    precalc();
     int t = 1;
-    cin >> t;
+    precalc();
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

@@ -1,10 +1,11 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 25-09-2023  22:17:32  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
-
+#define sc scan_single()
+#define int long long
 using namespace std;
 using ll = long long;
 using ull = unsigned long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -36,16 +43,26 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
+    int n = sc;
+    int A[n + 1];
+    int first_non_nega = 0;
+    for (int i = 1; i < n + 1; i++) {
+        A[i] = sc;
+        if (A[i] >= 0 && first_non_nega == 0) first_non_nega = i;
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    ll res = 0;
+    if (first_non_nega != 2) {
+        for (int i = 1; i <= n; i++) {
+            if (A[i] > 0) res += A[i];
+        }
+    } else {
+        for (int i = 3; i <= n; i++) {
+            if (A[i] > 0) res += A[i];
+        }
+        res += max(0ll, A[1] + A[2]);
     }
+    cout << res << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +74,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);

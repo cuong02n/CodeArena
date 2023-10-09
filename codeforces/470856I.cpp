@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 04-10-2023  08:36:58  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -35,29 +42,46 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+using p = pair<ll, bool>;
 void solve(bool v = false, int all_case = -1) {
     int n;
-    int A[n];
+    cin >> n;
+    long long cnt[100005] = {};
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
+        int a;
+        cin >> a;
+        cnt[a]++;
     }
-    string s;
-    cin >> s;
+
+    long long dp[100005][2] = {};
+    // dp[1][0] = 0;
+    // dp[1][1] = cnt[1];
+    // for (int i = 2; i <= 100000; ++i) {
+    //     dp[i][0] = max(dp[i - 1][0], dp[i - 1][1]);
+    //     dp[i][1] = dp[i - 1][0] + cnt[i] * i;
+    // }
+
+    cout << max(dp[100000][0], dp[100000][1]) << endl;
+
+    /*dp[0][0] = 0;
+    dp[0][1] = A[0];
     for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1]);
+        dp[i][1] = dp[i - 1][0] + A[i];
     }
+    cout << max(dp[n - 1][0], dp[n - 1][1]) << endl;
     if (!v && all_case == all_cases) {
         return;
     }
     if (v && all_case == all_cases) {
         _verbose();
-    }
+    }*/
 }
 
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
@@ -68,9 +92,8 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    precalc();
     int t = 1;
-    cin >> t;
+    precalc();
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

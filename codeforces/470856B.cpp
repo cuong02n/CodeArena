@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 25-09-2023  16:08:55  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -35,17 +42,53 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+using p = pair<int, bool>;
 void solve(bool v = false, int all_case = -1) {
     int n;
-    int A[n];
+    cin >> n;
+    p A[n];
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
+        int x = sc;
+        A[i].second = x ? true : false;
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    ll sum = 0;
+    for (int i = 0; i < n; i++) {
+        A[i].first = sc;
+        sum += A[i].first;
     }
+    vector<int> X;
+    vector<int> Y;
+    for (int i = 0; i < n; i++) {
+        ((A[i].second) ? X : Y).push_back(A[i].first);
+    }
+
+    // X: true
+    // Y: false
+    sort(all(X));
+    sort(all(Y));
+    ll r1 = 0, r2 = 0;
+    int n1 = X.size();
+    int n2 = Y.size();
+    // cout << n1 << " " << n2 << endl;
+    if (n2 == n1) {
+        sum *= 2;
+        sum -= min(X[0], Y[0]);
+    } else if (n1 < n2) {
+        for (int i = n1 - 1; i >= 0; i--) {
+            sum += X[i];
+        }
+        for (int i = n2 - 1; (i >= 0 && i >= n2 - n1); i--) {
+            sum += Y[i];
+        }
+    } else {
+        for (int i = n2 - 1; i >= 0; i--) {
+            sum += Y[i];
+        }
+        for (int i = n1 - 1; (i >= 0 && i >= n1 - n2); i--) {
+            sum += X[i];
+        }
+    }
+    cout << sum << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +100,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);

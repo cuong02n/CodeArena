@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 01-10-2023  00:27:19  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,25 +28,57 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
 int MOD = 1e9 + 7;
 int verbose = -1;
+;
 int all_cases = -1;
 void precalc() {
 }
+using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
+    int n = sc;
+    map<int, int> A;
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
+        int x = sc;
+        if (A.find(x) == A.end()) {
+            A[x] = 1;
+        } else {
+            A[x]++;
+        }
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    set<p> res;
+    p begin = *A.begin();
+    p last = *(--A.end());
+    res.insert(begin);
+    res.insert(last);
+    A.erase(A.begin());
+    A.erase(--A.end());
+    int add = 1;
+    while (add) {
+        add = 0;
+        for (auto it = A.begin(); it != A.end();) {
+            auto it_before = res.lower_bound(*it);
+            auto it_after = --it_before;
+            if (it_before->second * it_after->first > it_before->second * it->first + it->second * it_after->first) {
+                res.insert(make_pair(it->first, it->second));
+                add = 1;
+                A.erase(it++);
+            } else {
+                it++;
+            }
+        }
     }
+    _print(all(res));
+    cout << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +90,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);

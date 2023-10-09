@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 21-09-2023  14:03:27  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -35,16 +42,62 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
+
+int gcd(int x, int y) {
+    if (x < y) {
+        return gcd(y, x);
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    if (x % y) {
+        return gcd(y, x % y);
+    }
+    return y;
+}
+
+const int N = 1e7 + 5;
+bool prime[N] = {};
+vector<int> prm;
+void solve(bool v = false, int all_case = -1) {
+    int n = sc;
+    for (int i = 0; i < N; i++) {
+        prime[i] = true;
+    }
+    for (int i = 2; i < N; i++) {
+        for (int j = i + i; j < N; j += i) {
+            prime[j] = false;
+        }
+    }
+    for (int i = 2; i < N; i++) {
+        if (prime[i]) prm.push_back(i);
+    }
+    for (int i = 0; i < n; i++) {
+        int x = sc, y = sc;
+        int k = INT_MAX;
+        if (y - x == 1) {
+            cout << -1 << '\n';
+            continue;
+        }
+        if (__gcd(x, y) != 1) {
+            cout << 0 << '\n';
+            continue;
+        }
+        int c = sqrt(y - x);
+        int l = y - x;
+        int upper = sqrt(y - x);
+
+        for (int i = 0; (i < prm.size() && prm[i] <= c); i++) {
+            if (l % prm[i]) {
+                continue;
+            }
+            while (l % prm[i] == 0)
+                l /= prm[i];
+            if (x % prm[i] == 0) k = 0;
+            k = min(k, prm[i] - x % prm[i]);
+        }
+        if (l != 1) {
+            if (x % l == 0) k = 0;
+            k = min(k, l - x % l);
+        }
+        cout << k << '\n';
     }
     if (!v && all_case == all_cases) {
         return;
@@ -57,7 +110,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
@@ -68,9 +121,8 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    precalc();
     int t = 1;
-    cin >> t;
+    precalc();
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

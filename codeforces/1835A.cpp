@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 21-09-2023  10:28:38  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -35,16 +42,65 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
-void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
+using p = pair<int, int>;
+int exp(int x, int y) {
+    int res = 1;
+    while (--y) {
+        res *= 10;
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    return res;
+}
+int len(int x) {
+    int res = 0;
+    while (x > 0) {
+        x /= 10;
+        res++;
+    }
+    return res;
+}
+
+void solve(bool v = false, int all_case = -1) {
+    int a, b, c, k;
+    cin >> a >> b >> c >> k;
+    if (a > c || b > c) {
+        cout << -1 << endl;
+        return;
+    }
+    vector<p> res;
+    if (a == b && a == c) {
+        int min_c = 2 * exp(10, c);
+        int max_c = exp(10, c + 1) - 1;
+        int min_a = exp(10, a);
+        int max_a = exp(10, a + 1) - 1;
+        for (int A = min_a; A <= max_a; A++) {
+            int B = exp(10, b);
+            while (len(B) == b && len(A + B) == c) {
+                res.push_back(make_pair(A, B));
+                B++;
+            }
+        }
+    } else if (a == c && b < a) {
+        int min_b = exp(10, b);
+        int max_b = exp(10, b + 1) - 1;
+        int min_c = exp(10, c);
+        int max_c = exp(10, c + 1) - 1;
+        int min_a = exp(10, a);
+        int max_a = exp(10, a + 1) - 1;
+        min_a = max(min_a, min_c - max_b);
+        max_a = min(max_a, max_c - min_b);
+        for (int A = min_a; A <= max_a; A++) {
+            for (int B = min_b; B <= max_b;B++){
+                if (len(A + B) > c) break;
+                res.push_back(make_pair(A, B));
+            }
+        }
+    }
+    if (res.size() < k)
+        cout << -1 << endl;
+    else {
+        cout << res[k - 1].first << " + " << res[k - 1].second << " = " << res[k - 1].first + res[k - 1].second << endl;
+        // _print(all(res));
+        // cout << endl;
     }
     if (!v && all_case == all_cases) {
         return;
@@ -57,7 +113,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);

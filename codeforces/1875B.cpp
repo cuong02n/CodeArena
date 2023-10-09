@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 30-09-2023  22:56:43  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -36,16 +43,54 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
+    int n, m, k;
+    cin >> n >> m >> k;
+    multiset<int> J;
+    multiset<int> G;
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
+        int x = sc;
+        J.insert(x);
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    for (int i = 0; i < m; i++) {
+        int x = sc;
+        G.insert(x);
     }
+    k = k % 10 + 10;
+    for (int i = 1; i <= k; i++) {
+        if (i % 2) {
+            auto g = --G.end();
+            auto j = J.begin();
+            int _g = *g;
+            int _j = *j;
+            if (_g > _j) {
+                G.erase(g);
+                J.erase(j);
+                G.insert(_j);
+                J.insert(_g);
+            }
+        } else {
+            auto g = G.begin();
+            auto j = --J.end();
+            int _g = *g;
+            int _j = *j;
+            if (_j > _g) {
+                J.erase(j);
+                G.erase(g);
+                J.insert(_g);
+                G.insert(_j);
+            }
+        }
+        // cout << "after " << i << " move , 2 sets are: " << endl;
+        // _print(all(J));
+        // cout << endl;
+        // _print(all(G));
+        // cout << endl;
+    }
+    ll sum = 0;
+    for (int i : J) {
+        sum += i;
+    }
+    cout << sum << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +102,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);

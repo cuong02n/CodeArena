@@ -94,6 +94,8 @@
         "stdfloat": "cpp"
     },
     "cSpell.words": [
+        "FENC",
+        "FENW",
         "kadane"
     ],
     "C_Cpp.errorSquiggles": "enabled",

@@ -1,9 +1,10 @@
 /*
     author : cuong2905say
-    created : 15-09-2023  13:38:51  UTC: +7
+    created : 25-09-2023  15:51:03  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -27,6 +28,12 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
@@ -35,17 +42,38 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    int n;
-    int A[n];
+    int n = sc;
+    p A[n];
+    int odd = 0;
+    int even = 0;
     for (int i = 0; i < n; i++) {
-        cin >> A[i];
+        cin >> A[i].first;
+        A[i].first %= 2;
+        A[i].second = i + 1;
+        if (A[i].first)
+            odd++;
+        else
+            even++;
     }
-    string s;
-    cin >> s;
-    for (int i = 1; i < n; i++) {
-        pref[i] = pref[i - 1] + A[i];
+    sort(A, A + n);
+    if (A[n - 1].first) {
+        if (even >= 2) {
+            cout << "YES" << endl;
+            cout << A[0].second << " " << A[1].second << " " << A[n - 1].second << endl;
+        } else if (odd >= 3) {
+            cout << "YES" << endl;
+            cout << A[n - 1].second << " " << A[n - 2].second << " " << A[n - 3].second << endl;
+        } else {
+            cout << "NO" << endl;
+            return;
+        }
+    } else {
+        cout << "NO" << endl;
+        return;
     }
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -57,7 +85,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
