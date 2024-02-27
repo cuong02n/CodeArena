@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 30-10-2023  21:48:56  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -42,10 +42,37 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+int m_divisor(int x) {
+    int res = 0;
+    while (x % 2 == 0) {
+        res++;
+        x /= 2;
+    }
+    return res;
+}
+using p = pair<int, int>;
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n, q;
+    cin >> n >> q;
+    int lst = 32;
+    int A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+    }
+    for (int i = 0; i < q; i++) {
+        int x = sc;
+        if (x >= lst) continue;
+        lst = x;
+        for(int j = 0; j < n; j++){
+            if(m_divisor(A[j])>=x){
+                A[j] += (1 << (x - 1));
+            }
+        }
+    }
+    for(int i = 0; i < n; i++){
+        cout << A[i] << " ";
+    }
+    cout << endl;
     if (!v && all_case == all_cases) {
         return;
     }

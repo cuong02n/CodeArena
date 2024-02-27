@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 17-11-2023  21:49:07  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -40,12 +40,39 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n = sc;
+    int A[n];
+    ll s[n] = {0};
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+    }
+    s[0] = A[0];
+    for (int i = 1; i < n; i++) {
+        s[i] = s[i - 1] + A[i];
+    }
+    ll mx = LONG_LONG_MIN;
+    for (int i = 1; i < n; i++) {
+        if (n % i) continue;
+        ll _mx = LONG_LONG_MIN;
+        ll _mn = LONG_LONG_MAX;
+        for (int j = 0; j < n; j += i) {
+            cout << " j = " << j << endl;
+            if (j == 0) {
+                _mx = max(_mx, s[i - 1]);
+                _mn = min(_mn, s[i - 1]);
+            } else {
+                _mx = max(_mx, s[j + i - 1] - s[j - 1]);
+                _mn = min(_mn, s[j + i - 1] - s[j - 1]);
+            }
+            mx = max(mx, _mx - _mn);
+        }
+    }
+    cout << mx << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }

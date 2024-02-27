@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 09-10-2023  21:41:26  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -43,9 +43,17 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n = sc;
+    if (n < 7 || n == 9) {
+        cout << "NO" << endl;
+    } else {
+        cout << "YES" << endl;
+        if ((n - 3) % 3) {
+            cout << 1 << " " << 2 << " " << n - 3 << endl;
+        } else {
+            cout << 1 << " " << 4 << " " << n - 5 << endl;
+        }
+    }
     if (!v && all_case == all_cases) {
         return;
     }

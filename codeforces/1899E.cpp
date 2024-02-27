@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 17-11-2023  22:58:30  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -43,9 +43,18 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n = sc;
+    int A[n];
+    int mn = INT_MAX;
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+        mn = min(mn, A[i]);
+    }
+    int f_i = 0;
+    for (int i = n - 1; i >= 0; i--) {
+        if (A[i] == mn) f_i = i;
+    }
+    cout << (is_sorted(A+f_i,A+n) ? f_i : -1) << endl;
     if (!v && all_case == all_cases) {
         return;
     }

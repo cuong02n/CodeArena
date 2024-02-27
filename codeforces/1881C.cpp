@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 12-10-2023  21:54:25  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -42,10 +42,23 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+int distance(char x, char y, char z, char t) {
+    char k = max(max(max(x, y), z), t);
+    return (k - x) + (k - y) + (k - z) + (k - t);
+}
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n = sc;
+    string A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+    }
+    int res = 0;
+    for (int i = 0; i < n / 2; i++) {
+        for (int j = 0; j < n / 2; j++) {
+            res += distance(A[i][j], A[j][n - 1 - i], A[n - 1 - i][n - 1 - j], A[n - 1 - j][i]);
+        }
+    }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }

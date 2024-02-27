@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 12-10-2023  22:03:11  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -28,7 +28,7 @@ void _print(it begin, it end) {
     }
 }
 
-inline int scan_single() {
+int scan_single() {
     int x;
     cin >> x;
     return x;
@@ -40,12 +40,46 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+
+vector<int> prime;
+const int N = 1e6 + 10;
+bool n_prime[N] = {false};
+
 void precalc() {
+    n_prime[1] = false;
+    n_prime[2] = false;
+    n_prime[3] = false;
+    for (int i = 2; i < N; i++) {
+        for (int j = i + i; j < N; j += i) {
+            n_prime[j] = true;
+        }
+    }
+    for (int i = 1; i < N; i++) {
+        if (!n_prime[i]) prime.push_back(i);
+    }
 }
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n = sc;
+    map<int, int> cnt;
+    for (int i = 0; i < n; i++) {
+        int x = sc;
+        int k = 2;
+        while (x > 1 && k < prime.size() && k * k <= x) {
+            if (x % k) {
+                k++;
+                continue;
+            }
+            while (x % k == 0) {
+                cnt[k]++;
+                if (cnt[k] == n) cnt.erase(k);
+                x /= k;
+            }
+            k++;
+        }
+        if (x > 1) cnt[x]++;
+        if (x > 1 && cnt[x] == n) cnt.erase(x);
+    }
+    cout << (!cnt.size() ? "YES" : "NO") << endl;
     if (!v && all_case == all_cases) {
         return;
     }

@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 17-11-2023  22:48:08  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -43,9 +43,19 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n = sc;
+    map<int, int> cnt;
+    for (int i = 0; i < n; i++) {
+        int x = sc;
+        cnt[max(x, 2)]++;
+    }
+
+    ll res = 0;
+    for (pair<int, int> x : cnt) {
+        res += 1ll * x.second * (x.second - 1) / 2;
+    }
+    cout << res << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }

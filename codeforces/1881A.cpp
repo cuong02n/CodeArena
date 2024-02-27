@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 12-10-2023  21:36:59  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -43,9 +43,22 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n, m;
+    cin >> n >> m;
+    string x;
+    cin >> x;
+    string s;
+    cin >> s;
+    int res = 0;
+    while(x.length()<=1000*s.length()){
+        if(x.find(s)!=string::npos){
+            cout << res << endl;
+            return;
+        }
+        x.append(x);
+        res++;
+    }
+    cout << -1 << endl;
     if (!v && all_case == all_cases) {
         return;
     }

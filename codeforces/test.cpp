@@ -1,6 +1,12 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 27-12-2023  12:24:58  UTC: +7
+*/
+#include <bits/stdc++.h>
+using namespace std;
+/*
+    author : cuong2905say
+    created : 27-12-2023  12:49:44  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -43,15 +49,34 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
-    if (!v && all_case == all_cases) {
+    cout << "a";
+    string s;
+    cin >> s;
+    int maxlen = 0, count = 0, dau = -1, cuoi = -1, l = s.length();
+    for (int i = 0; i < l; i++) {
+        if (s[i] == '(') dau = i;
+    }
+    for (int i = l - 1; i >= 0; i--) {
+        if (s[i] == ')') cuoi = i;
+    }
+    if (dau == -1 || cuoi == -1) {
+        cout << "0 1";
         return;
     }
-    if (v && all_case == all_cases) {
-        _verbose();
+    stack<int> st;
+    st.push(-1);
+    for (int i = dau; i <= cuoi; i++) {
+        if (s[i] == '(')
+            st.push(i);
+        else if (!st.empty()) {
+            st.pop();
+            maxlen = max(maxlen, i - st.top());
+        }
     }
+    if (maxlen == 0) {
+        cout << "0 1";
+    } else
+        cout << maxlen;
 }
 
 void reset() {
@@ -68,9 +93,8 @@ signed main() {
     freopen("output.txt", "w", stdout);
 #endif
 
-    precalc();
     int t = 1;
-    cin >> t;
+    precalc();
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

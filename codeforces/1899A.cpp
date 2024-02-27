@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 17-11-2023  21:38:56  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -28,7 +28,7 @@ void _print(it begin, it end) {
     }
 }
 
-inline int scan_single() {
+inline int scan_single(){
     int x;
     cin >> x;
     return x;
@@ -40,12 +40,12 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-void precalc() {
+void precalc(){
+    
 }
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n = sc;
+    cout << ((n%3) ? "First" : "Second") << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -90,3 +90,4 @@ signed main() {
 
     return 0;
 }
+

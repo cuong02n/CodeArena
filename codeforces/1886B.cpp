@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 09-10-2023  21:50:35  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -27,7 +27,6 @@ void _print(it begin, it end) {
         cout << *i << " ";
     }
 }
-
 inline int scan_single() {
     int x;
     cin >> x;
@@ -37,15 +36,55 @@ inline int scan_single() {
 void _verbose() {
 }
 
+inline long double distance(int x1, int y1, int x2, int y2) {
+    return 1.0 * (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+}
+
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+
+using p = pair<double, double>;
+
+double distance_s(p p1, p p2) {
+    return sqrt((p1.first - p2.first) * (p1.first - p2.first) + (p1.second - p2.second) * (p1.second - p2.second));
+}
+p d, a, b;
+p o;
+double oa;
+double da;
+double ob;
+double db;
+double ab;
+bool check(double radius) {
+    if (radius >= ab / 2) {
+        return (oa <= radius || ob <= radius) && (da <= radius || db <= radius);
+    }
+    return (oa <= radius && da <= radius) || (ob <= radius && db <= radius);
+}
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    o.first = 0.0;
+    o.second = 0.0;
+    cin >> d.first >> d.second >> a.first >> a.second >> b.first >> b.second;
+    oa = distance_s(o, a);
+    da = distance_s(d, a);
+    ob = distance_s(o, b);
+    db = distance_s(d, b);
+    ab = distance_s(a, b);
+    set<double> x;
+    x.insert(oa);
+    x.insert(da);
+    x.insert(ob);
+    x.insert(db);
+    x.insert(ab / 2);
+    for (double i : x) {
+        if (check(i)) {
+            cout << setprecision(10) << i << endl;
+            return;
+        }
+    }
     if (!v && all_case == all_cases) {
         return;
     }

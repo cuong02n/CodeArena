@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 12-10-2023  21:45:52  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -42,10 +42,13 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int a, b, c;
+    cin >> a >> b >> c;
+    int x = gcd(gcd(a, b), c);
+    ll s = 0ll + a + b + c;
+    cout << ((s % x == 0 && s / x <= 6) ? "YES" : "NO") << endl;
     if (!v && all_case == all_cases) {
         return;
     }

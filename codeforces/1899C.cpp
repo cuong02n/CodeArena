@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 17-11-2023  22:23:38  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -42,13 +42,50 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+template <class T>
+T kadane(T A[], int size) {
+    T max_ending_here = 0;
+    T MAX = 0;
+    for (int i = 0; i < size; i++) {
+        max_ending_here += A[i];
+        if (max_ending_here < 0) {
+            max_ending_here = 0;
+        } else if (max_ending_here > MAX) {
+            MAX = max_ending_here;
+        }
+    }
+    if (MAX == 0) {
+        MAX = LLONG_MIN;
+        for (int i = 0; i < size; i++) {
+            MAX = max(MAX, A[i]);
+        }
+    }
+    return MAX;
+}
+
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    int n = sc;
+    int A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+    }
+    int dp[n];
+    dp[0] = A[0];
+    for (int i = 1; i < n; i++) {
+        if((A[i]+A[i-1])%2==0){
+            dp[i] = A[i];
+        }else{
+            dp[i] = max(dp[i - 1] + A[i],A[i]);
+        }
+    }
+    int res = INT_MIN;
+    for(int i = 0; i < n; i++){
+        res = max(res, dp[i]);
+    }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
-    }
+        }
     if (v && all_case == all_cases) {
         _verbose();
     }

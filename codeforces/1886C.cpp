@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 12-10-2023  13:02:26  UTC: +7
+    created : 09-10-2023  22:54:08  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -42,10 +42,47 @@ int verbose = -1;
 int all_cases = -1;
 void precalc() {
 }
+vector<char> lexicographicallySmallest(string S, int k) {
+    string ans = "";
+    int l = S.length();
+    stack<char> st;
+    for (int i = 0; i < l; i++) {
+        while (!st.empty() && k > 0 && st.top() > S[i]) {
+            st.pop();
+            k--;
+        }
+        st.push(S[i]);
+    }
+
+    if (k > 0)
+        while (k--)
+            st.pop();
+    vector<char> res;
+    while (!st.empty()) {
+        res.push_back(st.top());
+        st.pop();
+    }
+    reverse(all(res));
+    return res;
+}
+
 void solve(bool v = false, int all_case = -1) {
-    map<int, int> A;
-    A[0]++;
-    _print(all(A));
+    string x;
+    cin >> x;
+    int n = x.length();
+    ll pos;
+    cin >> pos;
+    --pos;
+    int step = n;
+    ll f_pos = 0ll;
+    while (f_pos + step <= pos) {
+        f_pos += step;
+        step--;
+    }
+    int need_delete = n - step;
+    int index = (int)(pos - f_pos);
+    cout << lexicographicallySmallest(x, need_delete)[index];
+    // cout << f_pos << " " << step << endl;
     if (!v && all_case == all_cases) {
         return;
     }
