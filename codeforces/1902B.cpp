@@ -1,8 +1,10 @@
 /*
     author : cuong2905say
-    created : 23-08-2023  20:10:41  UTC: +7
+    created : 03-12-2023  21:45:57  UTC: +7
 */
 #include <bits/stdc++.h>
+#define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -26,21 +28,49 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+void precalc() {
+}
 void solve(bool v = false, int all_case = -1) {
-    int res = 0;
-    int n = 99999;
-    for (int i = 1; i <= n; i++) {
-        if (i % 10 == 4 || (i / 10) % 10 == 4 || ((i / 100) % 10) == 4 || (i / 1000) % 10 == 4 || (i / 10000) % 10 == 4) {
-            res++;
+    ll n, p, l, t;
+    cin >> n >> p >> l >> t;
+
+    ll opened_task = (n - 1) / 7 + 1;
+    ll day = opened_task / 2 + opened_task % 2;
+    ll m_p = opened_task * t + day * l;
+    if (m_p == p) {
+    } else if (m_p < p) {
+        ll dif = p - m_p;
+        day += (p - m_p - 1) / l + 1;
+    } else {
+        // all day do the task
+        // if the last day do 1 task
+        if (opened_task % 2) {
+            if (m_p - (l + t) < p) {
+                // day is not change
+                cout << n - day << endl;
+                return;
+            }
+            // else not need the last day
+            // each day, 2 * t + l is enough
         }
+        // if all day do 2 task
+        ll each_day = 2 * t + l;
+        day = (p - 1) / each_day + 1;
     }
-    cout << n - res << endl;
+    cout << n - day << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -52,7 +82,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
@@ -63,7 +93,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
+    precalc();
     int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

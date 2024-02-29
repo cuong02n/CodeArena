@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 23-08-2023  20:10:41  UTC: +7
+    created : 24-08-2023  00:08:52  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,15 +32,27 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-void solve(bool v = false, int all_case = -1) {
-    int res = 0;
-    int n = 99999;
-    for (int i = 1; i <= n; i++) {
-        if (i % 10 == 4 || (i / 10) % 10 == 4 || ((i / 100) % 10) == 4 || (i / 1000) % 10 == 4 || (i / 10000) % 10 == 4) {
-            res++;
+vector<int> pa;
+void precalc() {
+    for (int i = 1; i <= 40000; i++) {
+        string x = to_string(i);
+        int n = x.length();
+        bool is_palin = true;
+        for (int i = 0, j = n - 1; i < j; i++, j--) {
+            if (x[i] != x[j]) {
+                is_palin = false;
+                break;
+            }
         }
+        if (is_palin) pa.push_back(i);
     }
-    cout << n - res << endl;
+}
+void solve(bool v = false, int all_case = -1) {
+    int n;
+    cin >> n;
+    int dp[n];
+    // when dp[i] = ways to 
+
     if (!v && all_case == all_cases) {
         return;
     }
@@ -62,8 +74,9 @@ int main() {
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
 #endif
-
+    precalc();
     int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

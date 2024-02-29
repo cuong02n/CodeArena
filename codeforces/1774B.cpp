@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 23-08-2023  20:10:41  UTC: +7
+    created : 22-08-2023  21:29:02  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -33,14 +33,13 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
-    int res = 0;
-    int n = 99999;
-    for (int i = 1; i <= n; i++) {
-        if (i % 10 == 4 || (i / 10) % 10 == 4 || ((i / 100) % 10) == 4 || (i / 1000) % 10 == 4 || (i / 10000) % 10 == 4) {
-            res++;
-        }
+    int n,m,k;
+    cin >> n >> m >> k;
+    int A[n];
+    for(int i = 0; i < n; i++){
+        cin >> A[i];
     }
-    cout << n - res << endl;
+    
     if (!v && all_case == all_cases) {
         return;
     }
@@ -64,6 +63,7 @@ int main() {
 #endif
 
     int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";
@@ -83,3 +83,4 @@ int main() {
 
     return 0;
 }
+

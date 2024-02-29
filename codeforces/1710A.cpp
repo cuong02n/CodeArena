@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 23-08-2023  20:10:41  UTC: +7
+    created : 23-08-2023  10:47:07  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -26,6 +26,26 @@ void _print(it begin, it end) {
     }
 }
 
+bool e(vector<int> res, int sum) {
+    ll s = 0;
+    for (int i = 0; i < res.size(); i++) {
+        s += res[i];
+    }
+    if (s < sum) {
+        return false;
+    }
+    if (sum % 2) {
+        for (int i = 0; i < res.size(); i++) {
+            if (res[i] >= 3) {
+                return true;
+            }
+        }
+    } else {
+        return true;
+    }
+    return false;
+}
+
 void _verbose() {
 }
 
@@ -33,17 +53,24 @@ int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
 void solve(bool v = false, int all_case = -1) {
+    int n, m, k;
+    cin >> n >> m >> k;
     int res = 0;
-    int n = 99999;
-    for (int i = 1; i <= n; i++) {
-        if (i % 10 == 4 || (i / 10) % 10 == 4 || ((i / 100) % 10) == 4 || (i / 1000) % 10 == 4 || (i / 10000) % 10 == 4) {
-            res++;
-        }
+    int _m = 0;
+    int _n = 0;
+    vector<int> resm;
+    vector<int> resn;
+    for (int i = 0; i < k; i++) {
+        int x;
+        cin >> x;
+        if (x / n >= 2) resm.push_back(x / n);
+        if (x / m >= 2) resn.push_back(x / m);
     }
-    cout << n - res << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
+    cout << (e(resm, m) || e(resn, n) ? "YES" : "NO") << endl;
     if (v && all_case == all_cases) {
         _verbose();
     }
@@ -64,6 +91,7 @@ int main() {
 #endif
 
     int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

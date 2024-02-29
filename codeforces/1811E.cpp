@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 23-08-2023  20:10:41  UTC: +7
+    created : 23-08-2023  20:19:16  UTC: +7
 */
 #include <bits/stdc++.h>
 
@@ -32,15 +32,29 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-void solve(bool v = false, int all_case = -1) {
-    int res = 0;
-    int n = 99999;
-    for (int i = 1; i <= n; i++) {
-        if (i % 10 == 4 || (i / 10) % 10 == 4 || ((i / 100) % 10) == 4 || (i / 1000) % 10 == 4 || (i / 10000) % 10 == 4) {
-            res++;
-        }
+ll num[20] = {1, 9};
+void precalc() {
+    for (int i = 1; i <= 15; i++) {
+        num[i] = num[i - 1] * 9;
     }
-    cout << n - res << endl;
+}
+inline void add(ll& res, int index, int value) {
+    ll m = 1;
+    for (int i = 0; i < index; ++i) {
+        m *= 10;
+    }
+    res += (value >= 4 ? value + 1 : value) * m;
+}
+void solve(bool v = false, int all_case = -1) {
+    ll k;
+    ll res = 0;
+    cin >> k;
+    for (int i = 15; i >= 0; i--) {
+        ll x = k / num[i];
+        k %= num[i];
+        add(res, i, x);
+    }
+    cout << res << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -64,6 +78,8 @@ int main() {
 #endif
 
     int t = 1;
+    cin >> t;
+    precalc();
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";

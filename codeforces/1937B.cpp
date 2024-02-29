@@ -1,8 +1,10 @@
 /*
     author : cuong2905say
-    created : 23-08-2023  20:10:41  UTC: +7
+    created : 29-02-2024  22:01:28  UTC: +7
 */
 #include <bits/stdc++.h>
+#define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -26,21 +28,31 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single(){
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+void precalc(){
+    
+}
 void solve(bool v = false, int all_case = -1) {
-    int res = 0;
-    int n = 99999;
-    for (int i = 1; i <= n; i++) {
-        if (i % 10 == 4 || (i / 10) % 10 == 4 || ((i / 100) % 10) == 4 || (i / 1000) % 10 == 4 || (i / 10000) % 10 == 4) {
-            res++;
-        }
+    int n = sc;
+    string x;
+    string y;
+    cin >> x >> y;
+    int d = 0;
+    for(int i = 1; i < n-1; i++){
+        if (x[i + 1] == y[i]) continue;
+        
     }
-    cout << n - res << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -52,7 +64,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
@@ -63,7 +75,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
+    precalc();
     int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";
@@ -83,3 +97,4 @@ int main() {
 
     return 0;
 }
+

@@ -1,8 +1,10 @@
 /*
     author : cuong2905say
-    created : 23-08-2023  20:10:41  UTC: +7
+    created : 05-12-2023  22:20:06  UTC: +7
 */
 #include <bits/stdc++.h>
+#define all(A) (A).begin(), (A).end()
+#define sc scan_single()
 
 using namespace std;
 using ll = long long;
@@ -26,21 +28,77 @@ void _print(it begin, it end) {
     }
 }
 
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
 void _verbose() {
 }
 
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
-void solve(bool v = false, int all_case = -1) {
-    int res = 0;
-    int n = 99999;
-    for (int i = 1; i <= n; i++) {
-        if (i % 10 == 4 || (i / 10) % 10 == 4 || ((i / 100) % 10) == 4 || (i / 1000) % 10 == 4 || (i / 10000) % 10 == 4) {
-            res++;
+void precalc() {
+}
+int min_distance(int x, int y, int prev_x, int prev_y) {
+    if (x > prev_y) {
+        return x - prev_y;
+    }
+    if (y < prev_x) {
+        return prev_x - y;
+    }
+    return 0;
+}
+using p = pair<int, int>;
+#define ff first
+#define ss second
+p intersec(p x, p y) {
+    if (x.ff > y.ss) {
+        return {-1, -1};
+    }
+    if (x.ss < y.ff) {
+        return {-1, -1};
+    }
+    if (x.ff <= y.ff && y.ff <= x.ss) {
+        return {y.ff, min(y.ss, x.ss)};
+    }
+    if (x.ff <= y.ss && y.ss <= x.ss) {
+        return {max(y.ff, x.ff), y.ss};
+    }
+    return x;
+}
+bool check(p A[], int n, int k) {
+    p blue_zone = {0, 0};
+    for (int i = 0; i < n; i++) {
+        blue_zone.ff -= k;
+        blue_zone.ss += k;
+        blue_zone = intersec(blue_zone, A[i]);
+        if (blue_zone.ff == -1) {
+            return false;
         }
     }
-    cout << n - res << endl;
+    return true;
+}
+void solve(bool v = false, int all_case = -1) {
+    int n = sc;
+    p A[n];
+    for (int i = 0; i < n; i++) {
+        cin >> A[i].ff >> A[i].ss;
+    }
+    int kl = 0, kr = 1e9;
+    int mid = kl + kr >> 1;
+    while (kl < kr) {
+        // cout << "l = " << kl << " r = " << kr << endl;
+        mid = kl + kr >> 1;
+        if (check(A, n, mid)) {
+            kr = mid;
+        } else {
+            kl = mid + 1;
+        }
+    }
+    cout << kl << endl;
     if (!v && all_case == all_cases) {
         return;
     }
@@ -52,7 +110,7 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
@@ -63,7 +121,9 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
+    precalc();
     int t = 1;
+    cin >> t;
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";
