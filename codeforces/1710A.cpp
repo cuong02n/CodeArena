@@ -27,10 +27,17 @@ void _print(it begin, it end) {
 }
 
 bool e(vector<int> res, int sum) {
+<<<<<<< HEAD
     ll s = 0;
     for (int i = 0; i < res.size(); i++) {
         s += res[i];
     }
+=======
+    int s = 0;
+    for (int i = 0; i < res.size(); i++) {
+        s += res[i];
+    }utfysl. j wt szdfygucxTEYSRUDGr e at rsy rsyXacwcf wdcwVCAS DS SD S S
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
     if (s < sum) {
         return false;
     }
@@ -63,8 +70,13 @@ void solve(bool v = false, int all_case = -1) {
     for (int i = 0; i < k; i++) {
         int x;
         cin >> x;
+<<<<<<< HEAD
         if (x / n >= 2) resm.push_back(x / n);
         if (x / m >= 2) resn.push_back(x / m);
+=======
+        if (x / n >= 2 && x / n != m - 1) resm.push_back(x / n);
+        if (x / m >= 2 && x / m != n - 1) resn.push_back(x / m);
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
     }
 
     if (!v && all_case == all_cases) {
@@ -110,4 +122,8 @@ int main() {
 #endif
 
     return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6

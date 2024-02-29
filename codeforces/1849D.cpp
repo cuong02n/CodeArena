@@ -1,39 +1,72 @@
 /*
     author : cuong2905say
-    created : 27-07-2023  20:39:16  UTC: +7
+    created : 28-08-2023  15:03:22  UTC: +7
 */
 #include <bits/stdc++.h>
+#define all(A) (A).begin(), (A).end()
 
 using namespace std;
 using ll = long long;
 using ull = unsigned long long;
 
+template <class T1, class T2>
+ostream& operator<<(ostream& os, pair<T1, T2> A) {
+    os << "{ " << A.first << ", " << A.second << " }";
+    return os;
+}
+template <class T1, class T2, class T3>
+ostream& operator<<(ostream& os, tuple<T1, T2, T3> A) {
+    os << "{ " << get<0>(A) << ", " << get<1>(A) << ", " << get<2>(A) << " }";
+    return os;
+}
+
+template <class it>
+void _print(it begin, it end) {
+    for (it i = begin; i != end; i++) {
+        cout << *i << " ";
+    }
+}
+
+void _verbose() {
+}
+
 int MOD = 1e9 + 7;
 int verbose = -1;
+int all_cases = -1;
+void precalc() {
+}
 using p = pair<int, int>;
-void solve(bool v = false) {
+void solve(bool v = false, int all_case = -1) {
     int n;
-    int A[n];
     cin >> n;
-
-    map<int, bool> B[3];
-    for (int i = 0; i < n; i++) {
-        cin >> A[i];
-        B[A[i]].insert({i, false});
-    }
-    int blue = n;
-    while (B[2].size()) {
-        auto k = B[2].begin();
-        if (k->second) {
-            B[2].erase(k);
-            continue;
+    // vector<int> A(n, 0);
+    int res = 0;
+    int s = -1;
+    for (int i = 0, h2 = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        if (s == -1) {
+            s = x;
+            if (!s) continue;
         }
-        k->second = true;
-        int pos = k->first;
-        // if()
+        if (x == 2) h2 = 1;
+        if (x == 0) {
+            if (s == 0 && h2 == 0) {
+                s = 0;
+            } else if (s || h2) {
+                s = -1;
+                h2 = 0;
+            }
+            res++;
+        }
     }
-
-    if (v) {
+    res += (s != -1) ? 1 : 0;
+    cout << max(res, 1) << endl;
+    if (!v && all_case == all_cases) {
+        return;
+    }
+    if (v && all_case == all_cases) {
+        _verbose();
     }
 }
 
@@ -52,14 +85,15 @@ int main() {
 #endif
 
     int t = 1;
+    precalc();
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";
 #endif
         if (verbose == i + 1) {
-            solve(true);
+            solve(true, t);
         } else {
-            solve();
+            solve(false, t);
         }
         reset();
     }

@@ -1,5 +1,0 @@
-case 1: 1
-case 2: 4
-case 3: 4
-case 4: 67108864
-time use: 0.0149746

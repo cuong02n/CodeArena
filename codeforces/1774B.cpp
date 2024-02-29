@@ -1,6 +1,10 @@
 /*
     author : cuong2905say
+<<<<<<< HEAD
     created : 22-08-2023  21:29:02  UTC: +7
+=======
+    created : 23-08-2023  08:40:34  UTC: +7
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
 */
 #include <bits/stdc++.h>
 
@@ -32,6 +36,7 @@ void _verbose() {
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+<<<<<<< HEAD
 void solve(bool v = false, int all_case = -1) {
     int n,m,k;
     cin >> n >> m >> k;
@@ -40,6 +45,62 @@ void solve(bool v = false, int all_case = -1) {
         cin >> A[i];
     }
     
+=======
+
+bool is(int res[], int n, int k) {
+    set<int> a;
+    int i = 0;
+    for (; i < k; i++) {
+        if (a.find(res[i]) == a.end()) {
+            a.insert(res[i]);
+        } else {
+            return false;
+        }
+    }
+    while (i < n) {
+        a.erase(res[i - k]);
+        if (a.find(res[i]) == a.end()) {
+            a.insert(res[i]);
+        } else {
+            return false;
+        }
+        i++;
+    }
+    return true;
+}
+int nxt(int i, int n, int k, queue<int> z) {
+    if (i + k >= n) {
+        return z.front();
+    }
+    return i + k;
+}
+
+void solve(bool v = false, int all_case = -1) {
+    int n, m, k;
+    cin >> n >> m >> k;
+    int A[m];
+    for (int i = 0; i < m; i++) {
+        cin >> A[i];
+    }
+    sort(A, A + m, greater<int>());
+    int res[n] = {};
+    set<int> z;
+    for (int i = 0; i < n; i++) {
+        z.push(i);
+    }
+    int indx = 0;
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < A[i]; j++) {
+            res[indx] = i + 1;
+            
+            indx = nxt(indx, n, k);
+            while (res[indx] != 0) {
+                indx++;
+            }
+        }
+    }
+    cout << (is(res, n, k) ? "YES" : "NO") << endl;
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
     if (!v && all_case == all_cases) {
         return;
     }
@@ -83,4 +144,7 @@ int main() {
 
     return 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6

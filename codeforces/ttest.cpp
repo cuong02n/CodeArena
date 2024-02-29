@@ -1,8 +1,16 @@
 /*
     author : cuong2905say
+<<<<<<< HEAD
     created : 23-08-2023  20:10:41  UTC: +7
 */
 #include <bits/stdc++.h>
+=======
+    created : 12-10-2023  13:02:26  UTC: +7
+*/
+#include <bits/stdc++.h>
+#define all(A) (A).begin(), (A).end()
+#define sc scan_single()
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
 
 using namespace std;
 using ll = long long;
@@ -26,12 +34,22 @@ void _print(it begin, it end) {
     }
 }
 
+<<<<<<< HEAD
+=======
+inline int scan_single() {
+    int x;
+    cin >> x;
+    return x;
+}
+
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
 void _verbose() {
 }
 
 int MOD = 1e9 + 7;
 int verbose = -1;
 int all_cases = -1;
+<<<<<<< HEAD
 void solve(bool v = false, int all_case = -1) {
     int res = 0;
     int n = 99999;
@@ -41,6 +59,14 @@ void solve(bool v = false, int all_case = -1) {
         }
     }
     cout << n - res << endl;
+=======
+void precalc() {
+}
+void solve(bool v = false, int all_case = -1) {
+    map<int, int> A;
+    A[0]++;
+    _print(all(A));
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
     if (!v && all_case == all_cases) {
         return;
     }
@@ -52,7 +78,11 @@ void solve(bool v = false, int all_case = -1) {
 void reset() {
 }
 
+<<<<<<< HEAD
 int main() {
+=======
+signed main() {
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
@@ -63,7 +93,13 @@ int main() {
     freopen("output.txt", "w", stdout);
 #endif
 
+<<<<<<< HEAD
     int t = 1;
+=======
+    precalc();
+    int t = 1;
+    cin >> t;
+>>>>>>> 56b5bcc1082cd17797f1bcbcca57872924a6bfb6
     for (int i = 0; i < t; i++) {
 #ifndef ONLINE_JUDGE
         cout << "case " << i + 1 << ": ";
