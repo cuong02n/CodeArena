@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 29-02-2024  22:01:28  UTC: +7
+    created : 20-09-2024  22:00:28  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -29,6 +29,7 @@ void _print(it begin, it end) {
 }
 
 inline int scan_single() {
+    cout << flush;
     int x;
     cin >> x;
     return x;
@@ -43,32 +44,51 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
+    string bin[] = {"0", "1"};
     int n = sc;
-    string x;
-    string y;
-    cin >> x >> y;
-    string s = "";
-    int d = -1;
-    for (int i = 0; i < n - 1; i++) {
-        if (x[i + 1] == '1' && y[i] == '0') {
-            d = i;
-            break;
+    string q = "";
+    bool forward = true;
+    while (q.size() != n) {
+        if (forward) {
+            string t = q + "0";
+            // query
+
+            cout << "? " << t << endl
+                 << flush;
+
+            int result = sc;
+            if (result == 1) {
+                q = t;
+            } else {
+                string t = q + ("1");
+                // query
+
+                cout << "? " << t << endl
+                     << flush;
+
+                int result = sc;
+                if (result == 1) {
+                    q = t;
+                } else {
+                    forward = false;
+                }
+            }
+        } else {
+            string t = ("0") + (q);
+            // query
+
+            cout << "? " << t << endl
+                 << flush;
+
+            int result = sc;
+            if (result == 1)
+                q = t;
+            else
+                q = ("1") + (q);
         }
     }
-    if (d == -1) d = n - 1;
-    for (int i = 0; i <= d; i++) {
-        s += x[i];
-    }
-    for (int i = d; i < n; i++) {
-        s += y[i];
-    }
-    int ret = 1;
-    for (int i = d; i >= 1; i--) {
-        if (x[i] != y[i - 1]) break;
-        ret++;
-    }
-    cout << s << endl;
-    cout << ret << endl;
+    cout << "! " << q << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }

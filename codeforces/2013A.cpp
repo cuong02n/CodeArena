@@ -1,6 +1,6 @@
 /*
     author : cuong2905say
-    created : 29-02-2024  22:01:28  UTC: +7
+    created : 20-09-2024  21:38:03  UTC: +7
 */
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
@@ -43,32 +43,14 @@ int all_cases = -1;
 void precalc() {
 }
 void solve(bool v = false, int all_case = -1) {
-    int n = sc;
-    string x;
-    string y;
-    cin >> x >> y;
-    string s = "";
-    int d = -1;
-    for (int i = 0; i < n - 1; i++) {
-        if (x[i + 1] == '1' && y[i] == '0') {
-            d = i;
-            break;
-        }
+    int n, x, y;
+    cin >> n >> x >> y;
+    if (n % min(x, y)) {
+        cout << n / min(x, y) + 1 << endl;
+    } else {
+        cout << n / min(x, y) << endl;
     }
-    if (d == -1) d = n - 1;
-    for (int i = 0; i <= d; i++) {
-        s += x[i];
-    }
-    for (int i = d; i < n; i++) {
-        s += y[i];
-    }
-    int ret = 1;
-    for (int i = d; i >= 1; i--) {
-        if (x[i] != y[i - 1]) break;
-        ret++;
-    }
-    cout << s << endl;
-    cout << ret << endl;
+
     if (!v && all_case == all_cases) {
         return;
     }
