@@ -45,7 +45,7 @@ int all_cases = -1;
 
 
 void solve() {
-	int n, k;
+	ll n, k;
 	string s;
 	cin >> n >> k >> s;
 	vector<ll> a(n);

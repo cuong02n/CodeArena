@@ -15,6 +15,6 @@ foreach(SOURCE_FILE ${ALL_CPP_FILES})
     string(REPLACE ".cpp" "" EXEC_NAME "${EXEC_NAME}")
 
     add_executable(${EXEC_NAME} "${ABS_PATH}"
-            codeforces/working/2109/2109C2.cpp
+            codeforces/working/2111/2111D.cpp
     )
 endforeach()

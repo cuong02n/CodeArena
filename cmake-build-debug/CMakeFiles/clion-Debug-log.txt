@@ -1,0 +1,4 @@
+"E:\JetBrains\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=E:/JetBrains/CLion 2024.3.5/bin/ninja/win/x64/ninja.exe" -G Ninja -S E:\CODE\C++\CodeArena -B E:\CODE\C++\CodeArena\cmake-build-debug
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: E:/CODE/C++/CodeArena/cmake-build-debug

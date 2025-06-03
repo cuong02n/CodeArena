@@ -1,0 +1,87 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Codeforces",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "working_2111_2111A::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-working_2111_2111A-Debug-ab0e7281318753118391.json",
+					"name" : "working_2111_2111A",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "working_2111_2111B::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-working_2111_2111B-Debug-687901db3e87ea1b72bb.json",
+					"name" : "working_2111_2111B",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "working_2111_2111C::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-working_2111_2111C-Debug-64c1ac77029cbbcc2860.json",
+					"name" : "working_2111_2111C",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "working_2111_2111D::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-working_2111_2111D-Debug-7316c031b41d360dfd5d.json",
+					"name" : "working_2111_2111D",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/CODE/C++/CodeArena/cmake-build-debug",
+		"source" : "E:/CODE/C++/CodeArena"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
