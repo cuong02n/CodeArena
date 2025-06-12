@@ -41,154 +41,115 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = E$:/CODE/C++/CodeArena/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target working_2111_2111A
+# Object build statements for EXECUTABLE target working_2118_2118A
 
 
 #############################################
-# Order-only phony target for working_2111_2111A
+# Order-only phony target for working_2118_2118A
 
-build cmake_object_order_depends_target_working_2111_2111A: phony || .
+build cmake_object_order_depends_target_working_2118_2118A: phony || .
 
-build CMakeFiles/working_2111_2111A.dir/codeforces/working/2111/2111A.cpp.obj: CXX_COMPILER__working_2111_2111A_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2111/2111A.cpp || cmake_object_order_depends_target_working_2111_2111A
-  DEP_FILE = CMakeFiles\working_2111_2111A.dir\codeforces\working\2111\2111A.cpp.obj.d
+build CMakeFiles/working_2118_2118A.dir/codeforces/working/2118/2118A.cpp.obj: CXX_COMPILER__working_2118_2118A_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2118/2118A.cpp || cmake_object_order_depends_target_working_2118_2118A
+  DEP_FILE = CMakeFiles\working_2118_2118A.dir\codeforces\working\2118\2118A.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\working_2111_2111A.dir
-  OBJECT_FILE_DIR = CMakeFiles\working_2111_2111A.dir\codeforces\working\2111
+  OBJECT_DIR = CMakeFiles\working_2118_2118A.dir
+  OBJECT_FILE_DIR = CMakeFiles\working_2118_2118A.dir\codeforces\working\2118
 
-build CMakeFiles/working_2111_2111A.dir/codeforces/working/2111/2111D.cpp.obj: CXX_COMPILER__working_2111_2111A_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2111/2111D.cpp || cmake_object_order_depends_target_working_2111_2111A
-  DEP_FILE = CMakeFiles\working_2111_2111A.dir\codeforces\working\2111\2111D.cpp.obj.d
+build CMakeFiles/working_2118_2118A.dir/codeforces/working/2118/2118C.cpp.obj: CXX_COMPILER__working_2118_2118A_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2118/2118C.cpp || cmake_object_order_depends_target_working_2118_2118A
+  DEP_FILE = CMakeFiles\working_2118_2118A.dir\codeforces\working\2118\2118C.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\working_2111_2111A.dir
-  OBJECT_FILE_DIR = CMakeFiles\working_2111_2111A.dir\codeforces\working\2111
+  OBJECT_DIR = CMakeFiles\working_2118_2118A.dir
+  OBJECT_FILE_DIR = CMakeFiles\working_2118_2118A.dir\codeforces\working\2118
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target working_2111_2111A
+# Link build statements for EXECUTABLE target working_2118_2118A
 
 
 #############################################
-# Link the executable working_2111_2111A.exe
+# Link the executable working_2118_2118A.exe
 
-build working_2111_2111A.exe: CXX_EXECUTABLE_LINKER__working_2111_2111A_Debug CMakeFiles/working_2111_2111A.dir/codeforces/working/2111/2111A.cpp.obj CMakeFiles/working_2111_2111A.dir/codeforces/working/2111/2111D.cpp.obj
+build working_2118_2118A.exe: CXX_EXECUTABLE_LINKER__working_2118_2118A_Debug CMakeFiles/working_2118_2118A.dir/codeforces/working/2118/2118A.cpp.obj CMakeFiles/working_2118_2118A.dir/codeforces/working/2118/2118C.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\working_2111_2111A.dir
+  OBJECT_DIR = CMakeFiles\working_2118_2118A.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = working_2111_2111A.exe
-  TARGET_IMPLIB = libworking_2111_2111A.dll.a
-  TARGET_PDB = working_2111_2111A.exe.dbg
+  TARGET_FILE = working_2118_2118A.exe
+  TARGET_IMPLIB = libworking_2118_2118A.dll.a
+  TARGET_PDB = working_2118_2118A.exe.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target working_2111_2111B
+# Object build statements for EXECUTABLE target working_2118_2118B
 
 
 #############################################
-# Order-only phony target for working_2111_2111B
+# Order-only phony target for working_2118_2118B
 
-build cmake_object_order_depends_target_working_2111_2111B: phony || .
+build cmake_object_order_depends_target_working_2118_2118B: phony || .
 
-build CMakeFiles/working_2111_2111B.dir/codeforces/working/2111/2111B.cpp.obj: CXX_COMPILER__working_2111_2111B_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2111/2111B.cpp || cmake_object_order_depends_target_working_2111_2111B
-  DEP_FILE = CMakeFiles\working_2111_2111B.dir\codeforces\working\2111\2111B.cpp.obj.d
+build CMakeFiles/working_2118_2118B.dir/codeforces/working/2118/2118B.cpp.obj: CXX_COMPILER__working_2118_2118B_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2118/2118B.cpp || cmake_object_order_depends_target_working_2118_2118B
+  DEP_FILE = CMakeFiles\working_2118_2118B.dir\codeforces\working\2118\2118B.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\working_2111_2111B.dir
-  OBJECT_FILE_DIR = CMakeFiles\working_2111_2111B.dir\codeforces\working\2111
+  OBJECT_DIR = CMakeFiles\working_2118_2118B.dir
+  OBJECT_FILE_DIR = CMakeFiles\working_2118_2118B.dir\codeforces\working\2118
 
-build CMakeFiles/working_2111_2111B.dir/codeforces/working/2111/2111D.cpp.obj: CXX_COMPILER__working_2111_2111B_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2111/2111D.cpp || cmake_object_order_depends_target_working_2111_2111B
-  DEP_FILE = CMakeFiles\working_2111_2111B.dir\codeforces\working\2111\2111D.cpp.obj.d
+build CMakeFiles/working_2118_2118B.dir/codeforces/working/2118/2118C.cpp.obj: CXX_COMPILER__working_2118_2118B_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2118/2118C.cpp || cmake_object_order_depends_target_working_2118_2118B
+  DEP_FILE = CMakeFiles\working_2118_2118B.dir\codeforces\working\2118\2118C.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\working_2111_2111B.dir
-  OBJECT_FILE_DIR = CMakeFiles\working_2111_2111B.dir\codeforces\working\2111
+  OBJECT_DIR = CMakeFiles\working_2118_2118B.dir
+  OBJECT_FILE_DIR = CMakeFiles\working_2118_2118B.dir\codeforces\working\2118
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target working_2111_2111B
+# Link build statements for EXECUTABLE target working_2118_2118B
 
 
 #############################################
-# Link the executable working_2111_2111B.exe
+# Link the executable working_2118_2118B.exe
 
-build working_2111_2111B.exe: CXX_EXECUTABLE_LINKER__working_2111_2111B_Debug CMakeFiles/working_2111_2111B.dir/codeforces/working/2111/2111B.cpp.obj CMakeFiles/working_2111_2111B.dir/codeforces/working/2111/2111D.cpp.obj
+build working_2118_2118B.exe: CXX_EXECUTABLE_LINKER__working_2118_2118B_Debug CMakeFiles/working_2118_2118B.dir/codeforces/working/2118/2118B.cpp.obj CMakeFiles/working_2118_2118B.dir/codeforces/working/2118/2118C.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\working_2111_2111B.dir
+  OBJECT_DIR = CMakeFiles\working_2118_2118B.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = working_2111_2111B.exe
-  TARGET_IMPLIB = libworking_2111_2111B.dll.a
-  TARGET_PDB = working_2111_2111B.exe.dbg
+  TARGET_FILE = working_2118_2118B.exe
+  TARGET_IMPLIB = libworking_2118_2118B.dll.a
+  TARGET_PDB = working_2118_2118B.exe.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target working_2111_2111C
+# Object build statements for EXECUTABLE target working_2118_2118C
 
 
 #############################################
-# Order-only phony target for working_2111_2111C
+# Order-only phony target for working_2118_2118C
 
-build cmake_object_order_depends_target_working_2111_2111C: phony || .
+build cmake_object_order_depends_target_working_2118_2118C: phony || .
 
-build CMakeFiles/working_2111_2111C.dir/codeforces/working/2111/2111C.cpp.obj: CXX_COMPILER__working_2111_2111C_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2111/2111C.cpp || cmake_object_order_depends_target_working_2111_2111C
-  DEP_FILE = CMakeFiles\working_2111_2111C.dir\codeforces\working\2111\2111C.cpp.obj.d
+build CMakeFiles/working_2118_2118C.dir/codeforces/working/2118/2118C.cpp.obj: CXX_COMPILER__working_2118_2118C_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2118/2118C.cpp || cmake_object_order_depends_target_working_2118_2118C
+  DEP_FILE = CMakeFiles\working_2118_2118C.dir\codeforces\working\2118\2118C.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\working_2111_2111C.dir
-  OBJECT_FILE_DIR = CMakeFiles\working_2111_2111C.dir\codeforces\working\2111
-
-build CMakeFiles/working_2111_2111C.dir/codeforces/working/2111/2111D.cpp.obj: CXX_COMPILER__working_2111_2111C_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2111/2111D.cpp || cmake_object_order_depends_target_working_2111_2111C
-  DEP_FILE = CMakeFiles\working_2111_2111C.dir\codeforces\working\2111\2111D.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\working_2111_2111C.dir
-  OBJECT_FILE_DIR = CMakeFiles\working_2111_2111C.dir\codeforces\working\2111
+  OBJECT_DIR = CMakeFiles\working_2118_2118C.dir
+  OBJECT_FILE_DIR = CMakeFiles\working_2118_2118C.dir\codeforces\working\2118
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target working_2111_2111C
+# Link build statements for EXECUTABLE target working_2118_2118C
 
 
 #############################################
-# Link the executable working_2111_2111C.exe
+# Link the executable working_2118_2118C.exe
 
-build working_2111_2111C.exe: CXX_EXECUTABLE_LINKER__working_2111_2111C_Debug CMakeFiles/working_2111_2111C.dir/codeforces/working/2111/2111C.cpp.obj CMakeFiles/working_2111_2111C.dir/codeforces/working/2111/2111D.cpp.obj
+build working_2118_2118C.exe: CXX_EXECUTABLE_LINKER__working_2118_2118C_Debug CMakeFiles/working_2118_2118C.dir/codeforces/working/2118/2118C.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\working_2111_2111C.dir
+  OBJECT_DIR = CMakeFiles\working_2118_2118C.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = working_2111_2111C.exe
-  TARGET_IMPLIB = libworking_2111_2111C.dll.a
-  TARGET_PDB = working_2111_2111C.exe.dbg
-
-# =============================================================================
-# Object build statements for EXECUTABLE target working_2111_2111D
-
-
-#############################################
-# Order-only phony target for working_2111_2111D
-
-build cmake_object_order_depends_target_working_2111_2111D: phony || .
-
-build CMakeFiles/working_2111_2111D.dir/codeforces/working/2111/2111D.cpp.obj: CXX_COMPILER__working_2111_2111D_unscanned_Debug E$:/CODE/C++/CodeArena/codeforces/working/2111/2111D.cpp || cmake_object_order_depends_target_working_2111_2111D
-  DEP_FILE = CMakeFiles\working_2111_2111D.dir\codeforces\working\2111\2111D.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  OBJECT_DIR = CMakeFiles\working_2111_2111D.dir
-  OBJECT_FILE_DIR = CMakeFiles\working_2111_2111D.dir\codeforces\working\2111
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target working_2111_2111D
-
-
-#############################################
-# Link the executable working_2111_2111D.exe
-
-build working_2111_2111D.exe: CXX_EXECUTABLE_LINKER__working_2111_2111D_Debug CMakeFiles/working_2111_2111D.dir/codeforces/working/2111/2111D.cpp.obj
-  FLAGS = -g
-  LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\working_2111_2111D.dir
-  POST_BUILD = cd .
-  PRE_LINK = cd .
-  TARGET_FILE = working_2111_2111D.exe
-  TARGET_IMPLIB = libworking_2111_2111D.dll.a
-  TARGET_PDB = working_2111_2111D.exe.dbg
+  TARGET_FILE = working_2118_2118C.exe
+  TARGET_IMPLIB = libworking_2118_2118C.dll.a
+  TARGET_PDB = working_2118_2118C.exe.dbg
 
 
 #############################################
@@ -216,13 +177,11 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build working_2111_2111A: phony working_2111_2111A.exe
+build working_2118_2118A: phony working_2118_2118A.exe
 
-build working_2111_2111B: phony working_2111_2111B.exe
+build working_2118_2118B: phony working_2118_2118B.exe
 
-build working_2111_2111C: phony working_2111_2111C.exe
-
-build working_2111_2111D: phony working_2111_2111D.exe
+build working_2118_2118C: phony working_2118_2118C.exe
 
 # =============================================================================
 # Folder targets.
@@ -232,7 +191,7 @@ build working_2111_2111D: phony working_2111_2111D.exe
 #############################################
 # Folder: E:/CODE/C++/CodeArena/cmake-build-debug
 
-build all: phony working_2111_2111A.exe working_2111_2111B.exe working_2111_2111C.exe working_2111_2111D.exe
+build all: phony working_2118_2118A.exe working_2118_2118B.exe working_2118_2118C.exe
 
 # =============================================================================
 # Built-in targets

@@ -1,6 +1,3 @@
-//
-// Created by NMCuong on 03-Jun-25.
-//
 #include <bits/stdc++.h>
 #define all(A) (A).begin(), (A).end()
 #define sc scan_single()
@@ -34,17 +31,16 @@ int all_cases = -1;
 
 
 void solve() {
-	int n, m;
-	cin >> n >> m;
-
-	vector<int> rooms(m);
-	for (int i = 0; i < m; ++i) {
-		cin >> rooms[i];
+	int n, k;
+	cin >> n >> k;
+	for (int i = 0; i < n; ++i) {
+		if (i < k) {
+			cout << 1;
+		} else {
+			cout << 0;
+		}
 	}
-
-	sort(rooms.begin(), rooms.end());
-
-	
+	cout<<endl;
 }
 
 
