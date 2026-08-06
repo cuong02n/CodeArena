@@ -145,11 +145,15 @@ int main() {
 
 ## Môi trường / compiler
 
-- **WinLibs g++ 16.1** (POSIX/UCRT), cài bằng:
+- **WinLibs g++ 16.1** (POSIX/UCRT), cài trên ổ **D**:
+  ```powershell
+  winget install --id BrechtSanders.WinLibs.POSIX.UCRT --scope user --location D:\SDK\winlibs
   ```
-  winget install BrechtSanders.WinLibs.POSIX.UCRT --scope user
-  ```
-  Binary nằm ở `%LOCALAPPDATA%\Microsoft\WinGet\Packages\BrechtSanders.WinLibs...\mingw64\bin\g++.exe`
+  Binary: `D:\SDK\winlibs\mingw64\bin\g++.exe` — `run.ps1` kiểm tra đường dẫn này **trước** khi
+  dò PATH, nên không cần thêm gì vào PATH.
+
+- Đây là package *portable (zip)*: tải ~260 MB, bung ra ~11.700 file / 913 MB, nên cài lại mất
+  vài phút. Cứ để chạy, đừng tưởng treo.
 
 - **Bắt buộc compile `-static`.** winget chỉ shim command lên PATH chứ không đưa runtime DLL vào,
   nên exe link động sẽ crash với `0xC0000135 STATUS_DLL_NOT_FOUND` (exit code `-1073741515`).

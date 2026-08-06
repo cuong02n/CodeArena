@@ -39,9 +39,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .vscode/run.ps1 -Source <pat
 ```
 
 ### Compiler / environment gotchas
-- Compiler is **WinLibs g++ 16.1** (POSIX/UCRT), installed via
-  `winget install BrechtSanders.WinLibs.POSIX.UCRT --scope user`.
-  Binary: `%LOCALAPPDATA%\Microsoft\WinGet\Packages\BrechtSanders.WinLibs...\mingw64\bin\g++.exe`.
+- Compiler is **WinLibs g++ 16.1** (POSIX/UCRT), installed **on D:** via
+  `winget install --id BrechtSanders.WinLibs.POSIX.UCRT --scope user --location D:\SDK\winlibs`.
+  Binary: `D:\SDK\winlibs\mingw64\bin\g++.exe` — `run.ps1` checks this path first, before PATH.
+- It is a *portable (zip)* package: ~260 MB download that expands to ~11.7k files / 913 MB, so a
+  (re)install takes several minutes. It is **not** guaranteed to be on PATH — do not rely on
+  `Get-Command g++`.
 - **`-static` is required.** winget only shims the commands onto PATH, not the runtime DLLs,
   so a dynamically-linked exe crashes with `0xC0000135 STATUS_DLL_NOT_FOUND` (exit `-1073741515`).
   `run.ps1` always compiles `-static` and has a fallback that locates `g++` under WinGet Packages

@@ -12,19 +12,25 @@ $root = Split-Path -Parent $PSScriptRoot          # .vscode -> project root
 $exe  = Join-Path $env:TEMP 'codearena_run.exe'   # outside the repo; overwritten every run
 
 function Get-Gxx {
+    # Direct hits first (cheap) - the WinLibs install lives on D:\SDK
+    foreach ($p in @(
+            'D:\SDK\winlibs\mingw64\bin\g++.exe',
+            'C:\msys64\ucrt64\bin\g++.exe',
+            'C:\msys64\mingw64\bin\g++.exe')) {
+        if (Test-Path $p) { return $p }
+    }
     $c = Get-Command g++ -ErrorAction SilentlyContinue
     if ($c) { return $c.Source }
-    # Fallback: locate WinLibs/MSYS2 g++ even if PATH hasn't refreshed yet
+    # Fallback: search the install roots, in case the layout/version changed
     foreach ($base in @(
-            "$env:LOCALAPPDATA\Microsoft\WinGet\Packages",
-            'C:\msys64\ucrt64\bin',
-            'C:\msys64\mingw64\bin')) {
+            'D:\SDK\winlibs',
+            "$env:LOCALAPPDATA\Microsoft\WinGet\Packages")) {
         if (Test-Path $base) {
             $hit = Get-ChildItem $base -Filter g++.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
             if ($hit) { return $hit.FullName }
         }
     }
-    throw "g++ not found. Reload VS Code (Ctrl+Shift+P > Reload Window) after installing the compiler."
+    throw "g++ not found. Install it with:  winget install --id BrechtSanders.WinLibs.POSIX.UCRT --scope user --location D:\SDK\winlibs   (then Ctrl+Shift+P > Reload Window)"
 }
 
 $gxx = Get-Gxx
