@@ -35,6 +35,22 @@
         "clear": true
       },
       "problemMatcher": []
+    },
+    {
+      "label": "Install CP keybindings",
+      "detail": "Merge .vscode/keybindings.json (Ctrl+F9 / Ctrl+F8) into your user keybindings",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile", "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/.vscode/install-keybindings.ps1"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
     }
   ],
   "inputs": [
