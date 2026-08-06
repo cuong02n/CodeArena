@@ -6,8 +6,7 @@
       "type": "shell",
       "command": "powershell",
       "args": [
-        "-NoProfile",
-        "-ExecutionPolicy", "Bypass",
+        "-NoProfile", "-ExecutionPolicy", "Bypass",
         "-File", "${workspaceFolder}/.vscode/run.ps1",
         "-Source", "${file}"
       ],
@@ -19,6 +18,35 @@
         "focus": false
       },
       "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "New CP problem",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile", "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/.vscode/newcp.ps1",
+        "-Contest", "${input:contest}",
+        "-Problem", "${input:problem}"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "contest",
+      "type": "promptString",
+      "description": "Contest id (vd: 2243)"
+    },
+    {
+      "id": "problem",
+      "type": "promptString",
+      "description": "Problem (vd: A)"
     }
   ]
 }
