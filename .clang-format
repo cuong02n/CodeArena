@@ -1,0 +1,24 @@
+# Style theo quy uoc Java (IntelliJ / CLion)
+BasedOnStyle: Google
+Language: Cpp
+
+IndentWidth: 4
+ContinuationIndentWidth: 8
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+
+BreakBeforeBraces: Attach
+PointerAlignment: Left
+SpaceBeforeParens: ControlStatements
+
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+
+AccessModifierOffset: -4
+IndentCaseLabels: true
+NamespaceIndentation: None
+SortIncludes: false
