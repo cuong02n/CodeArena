@@ -6,7 +6,22 @@ Repo lời giải competitive programming cá nhân, viết bằng **C++17**, ch
 được compile và chạy riêng lẻ.
 
 - 277 contest trong `codeforces/archive/`, ~526 file `.cpp`
-- Build/run bằng **VS Code task + g++**, không dùng CMake
+- Build/run bằng **VS Code / Antigravity task + g++**, không dùng CMake
+
+---
+
+## ⚡ Cài đặt nhanh (1-Click Setup sau khi cài lại Win)
+
+Chỉ cần thực hiện **1 trong 3 cách** sau để tự động cài đặt compiler, cấu hình PATH, phím tắt (`Ctrl+F9`, `Ctrl+F8`) và snippets:
+
+1. **Nhấp đúp chuột** vào file [`setup.bat`](file:///d:/CODE/CodeArena/setup.bat) ở thư mục gốc.
+2. Hoặc chạy lệnh PowerShell:
+   ```powershell
+   powershell -NoProfile -ExecutionPolicy Bypass -File setup.ps1
+   ```
+3. Hoặc mở Command Palette (`Ctrl+Shift+P`) -> chọn **Run Task** -> **`CP: Setup environment & keybindings`**.
+
+Chi tiết xem tại [SETUP.md](file:///d:/CODE/CodeArena/SETUP.md).
 
 ---
 
@@ -145,11 +160,8 @@ int main() {
 
 ## Môi trường / compiler
 
-- **WinLibs g++ 16.1** (POSIX/UCRT), cài trên ổ **D**:
-  ```powershell
-  winget install --id BrechtSanders.WinLibs.POSIX.UCRT --scope user --location D:\SDK\winlibs
-  ```
-  Binary: `D:\SDK\winlibs\mingw64\bin\g++.exe` — `run.ps1` kiểm tra đường dẫn này **trước** khi
+- **WinLibs g++** (POSIX/UCRT), cài trên ổ **D**:
+  Binary: `D:\SDK\mingw64\bin\g++.exe` — `run.ps1` kiểm tra đường dẫn này **trước** khi
   dò PATH, nên không cần thêm gì vào PATH.
 
 - Đây là package *portable (zip)*: tải ~260 MB, bung ra ~11.700 file / 913 MB, nên cài lại mất

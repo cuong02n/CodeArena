@@ -2,16 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "C/C++: Debug active file",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "c:/Users/NMCuong/OneDrive/Desktop/CODE/C++/CodeArena",
-      "program": "c:/Users/NMCuong/OneDrive/Desktop/CODE/C++/CodeArena/build/Debug/outDebug",
+      "externalConsole": false,
+      "cwd": "${workspaceFolder}",
+      "program": "${fileDirname}/${fileBasenameNoExtension}.exe",
       "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
+      "miDebuggerPath": "D:/SDK/mingw64/bin/gdb.exe",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",

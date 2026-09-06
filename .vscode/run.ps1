@@ -14,6 +14,7 @@ $exe  = Join-Path $env:TEMP 'codearena_run.exe'   # outside the repo; overwritte
 function Get-Gxx {
     # Direct hits first (cheap) - the WinLibs install lives on D:\SDK
     foreach ($p in @(
+            'D:\SDK\mingw64\bin\g++.exe',
             'D:\SDK\winlibs\mingw64\bin\g++.exe',
             'C:\msys64\ucrt64\bin\g++.exe',
             'C:\msys64\mingw64\bin\g++.exe')) {
@@ -23,7 +24,9 @@ function Get-Gxx {
     if ($c) { return $c.Source }
     # Fallback: search the install roots, in case the layout/version changed
     foreach ($base in @(
+            'D:\SDK\mingw64',
             'D:\SDK\winlibs',
+            'D:\SDK',
             "$env:LOCALAPPDATA\Microsoft\WinGet\Packages")) {
         if (Test-Path $base) {
             $hit = Get-ChildItem $base -Filter g++.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1

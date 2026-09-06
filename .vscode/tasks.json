@@ -37,6 +37,22 @@
       "problemMatcher": []
     },
     {
+      "label": "CP: Setup environment & keybindings",
+      "detail": "1-Click setup: Check compiler, User PATH, keybindings, and snippets",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile", "-ExecutionPolicy", "Bypass",
+        "-File", "${workspaceFolder}/setup.ps1"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Install CP keybindings",
       "detail": "Merge .vscode/keybindings.json (Ctrl+F9 / Ctrl+F8) into your user keybindings",
       "type": "shell",

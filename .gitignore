@@ -50,6 +50,13 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/run.ps1
+!.vscode/newcp.ps1
+!.vscode/install-keybindings.ps1
+!.vscode/keybindings.json
+!.vscode/c_cpp_properties.json
+!.vscode/competitive.code-snippets
+!.vscode/snippet.txt
 
 # Local History for Visual Studio Code
 .history/

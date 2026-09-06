@@ -1,0 +1,13 @@
+[
+  {
+    "key": "ctrl+f9",
+    "command": "workbench.action.tasks.runTask",
+    "args": "CP: Build & Run active file",
+    "when": "editorTextFocus && editorLangId == 'cpp'"
+  },
+  {
+    "key": "ctrl+f8",
+    "command": "workbench.action.tasks.runTask",
+    "args": "New CP problem"
+  }
+]
